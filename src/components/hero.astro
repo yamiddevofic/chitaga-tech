@@ -34,13 +34,14 @@ const {
             </div>
         </ScrollAnimation>
 
-        <ScrollAnimation delay={0.4} variants={{
-            hidden: { opacity: 0, scale: 0.9 },
+        <ScrollAnimation className="hero-image-col" delay={0.4} variants={{
+            hidden: { opacity: 0, scale: 0.95 },
             visible: { opacity: 1, scale: 1 }
         }} client:load as="div">
             <div class="hero-image-wrapper">
                 <img src={imgSrc} alt={imgAlt} class="hero-img hero-img-light" loading="eager" />
                 <img src={imgDarkSrc} alt={imgAlt} class="hero-img hero-img-dark" loading="eager" />
+                <div class="hero-image-overlay"></div>
             </div>
         </ScrollAnimation>
     </div>
@@ -54,45 +55,41 @@ const {
     :global(.dark) .hero-img-dark  { display: block; }
 
     .hero-section {
-        padding: 3rem 2rem 4rem;
+        padding: 0;
+        min-height: calc(100vh - 64px);
+        display: flex;
+        align-items: center;
         background: #ffffff;
+        overflow: hidden;
     }
 
     :global(.dark) .hero-section {
         background: #191919;
     }
 
-    @media (min-width: 768px) {
-        .hero-section {
-            padding: 4rem 3rem 5rem;
-        }
-    }
-
     @media (min-width: 1024px) {
         .hero-section {
-            padding: 5rem 4rem 6rem;
+            padding-left: max(4rem, calc((100vw - 1200px) / 2));
         }
     }
 
     .hero-inner {
-        max-width: 1080px;
-        margin: 0 auto;
-        display: grid;
-        gap: 2rem;
-        align-items: center;
         width: 100%;
+        display: grid;
+        gap: 0;
+        align-items: center;
     }
 
     @media (min-width: 768px) {
         .hero-inner {
             grid-template-columns: 1fr 1fr;
-            gap: 4rem;
         }
     }
 
     @media (min-width: 1024px) {
         .hero-inner {
-            gap: 5rem;
+            max-width: none;
+            grid-template-columns: 1fr 50vw;
         }
     }
 
@@ -103,6 +100,20 @@ const {
         gap: 1.25rem;
         align-items: flex-start;
         text-align: left;
+        padding: 3rem 2rem;
+        order: 1;
+    }
+
+    @media (min-width: 768px) {
+        :global(.hero-content) {
+            padding: 4rem 3rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        :global(.hero-content) {
+            padding: 4rem 3rem 4rem 0;
+        }
     }
 
     /* Badge */
@@ -224,21 +235,31 @@ const {
         color: var(--color-orange);
     }
 
+    /* Image column */
+    :global(.hero-image-col) {
+        width: 100%;
+        order: 2;
+    }
+
+    @media (min-width: 768px) {
+        :global(.hero-image-col) {
+            height: 100%;
+        }
+    }
+
     /* Image */
     .hero-image-wrapper {
-        flex-shrink: 0;
+        position: relative;
         width: 100%;
-        max-width: 480px;
-        border-radius: 1rem;
         overflow: hidden;
-        aspect-ratio: 4 / 3;
+        aspect-ratio: 16 / 10;
     }
 
     @media (min-width: 768px) {
         .hero-image-wrapper {
-            width: 100%;
-            max-width: none;
-            aspect-ratio: 4 / 3;
+            aspect-ratio: auto;
+            height: calc(100vh - 64px);
+            border-radius: 0;
         }
     }
 
@@ -246,5 +267,47 @@ const {
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+
+    /* Gradient overlay — mobile: fog from top; desktop: left fade */
+    .hero-image-overlay {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: linear-gradient(
+            to bottom,
+            #ffffff 0%,
+            rgba(255, 255, 255, 0.5) 15%,
+            transparent 40%
+        );
+    }
+
+    :global(.dark) .hero-image-overlay {
+        background: linear-gradient(
+            to bottom,
+            #191919 0%,
+            rgba(25, 25, 25, 0.5) 15%,
+            transparent 40%
+        );
+    }
+
+    @media (min-width: 768px) {
+        .hero-image-overlay {
+            background: linear-gradient(
+                to right,
+                #ffffff 0%,
+                rgba(255, 255, 255, 0.5) 10%,
+                transparent 30%
+            );
+        }
+
+        :global(.dark) .hero-image-overlay {
+            background: linear-gradient(
+                to right,
+                #191919 0%,
+                rgba(25, 25, 25, 0.5) 10%,
+                transparent 30%
+            );
+        }
     }
 </style>

@@ -23,7 +23,7 @@ const buttonToggle = () => {
                 gap: '0.5rem'
             }}
         >
-            {theme === "light" ? <FaMoon size={20} /> : <FaSun size={20} />}
+            {theme === "light" ? <FaSun size={20} /> : <FaMoon size={20} />}
         </button>
     );
 }
