@@ -1,0 +1,308 @@
+---
+import ScrollAnimation from './ScrollAnimation.jsx';
+---
+
+<section id="proyectos" class="projects-section">
+    <div class="projects-inner">
+        <ScrollAnimation className="projects-header" delay={0.2} client:load as="div">
+            <span class="projects-badge">Ideas en marcha</span>
+            <h2 class="projects-title">Proyectos que queremos desarrollar</h2>
+            <p class="projects-subtitle">Estas son las primeras ideas que buscamos construir juntos como comunidad.</p>
+        </ScrollAnimation>
+
+        <div class="projects-grid">
+            <ScrollAnimation delay={0.3} variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+                                <line x1="8" y1="21" x2="16" y2="21"/>
+                                <line x1="12" y1="17" x2="12" y2="21"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Portal Educativo Chitagá</h3>
+                        <p>Una plataforma web para conectar estudiantes con recursos educativos y oportunidades de formación tecnológica.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Astro</span>
+                            <span class="project-tag">React</span>
+                            <span class="project-tag">Node.js</span>
+                        </div>
+                    </div>
+                </div>
+            </ScrollAnimation>
+
+            <ScrollAnimation delay={0.4} variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+                                <circle cx="12" cy="10" r="3"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>Mapa Digital de Chitagá</h3>
+                        <p>Un mapa interactivo con puntos de interés, comercios locales y rutas turísticas de nuestro municipio.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">Leaflet</span>
+                            <span class="project-tag">TypeScript</span>
+                            <span class="project-tag">API REST</span>
+                        </div>
+                    </div>
+                </div>
+            </ScrollAnimation>
+
+            <ScrollAnimation delay={0.5} variants={{
+                hidden: { opacity: 0, y: 40 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="project-card">
+                    <div class="project-image">
+                        <div class="project-image-placeholder">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5"/>
+                                <path d="M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="project-body">
+                        <h3>App de Gestión Agrícola</h3>
+                        <p>Una aplicación móvil para ayudar a agricultores locales a registrar y optimizar sus cultivos.</p>
+                        <div class="project-tags">
+                            <span class="project-tag">React Native</span>
+                            <span class="project-tag">Firebase</span>
+                            <span class="project-tag">IoT</span>
+                        </div>
+                    </div>
+                </div>
+            </ScrollAnimation>
+        </div>
+    </div>
+</section>
+
+<style>
+    .projects-section {
+        padding: 5rem 2rem;
+        background: #ffffff;
+    }
+
+    :global(.dark) .projects-section {
+        background: #191919;
+    }
+
+    @media (min-width: 768px) {
+        .projects-section {
+            padding: 6rem 3rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .projects-section {
+            padding: 8rem 4rem;
+        }
+    }
+
+    .projects-inner {
+        max-width: 1080px;
+        display: grid;
+        gap: 2rem;
+        margin: 0 auto;
+    }
+
+    .projects-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+    }
+
+    .projects-badge {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.3rem 0.85rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        border-radius: 9999px;
+        color: var(--color-green-dark);
+        border: 1px solid var(--color-green-dark);
+        font-family: var(--font-pop);
+    }
+
+    :global(.dark) .projects-badge {
+        color: var(--color-orange);
+        border-color: var(--color-orange);
+    }
+
+    .projects-title {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 1.75rem;
+        line-height: 1.2;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .projects-title {
+        color: var(--color-white);
+    }
+
+    @media (min-width: 768px) {
+        .projects-title {
+            font-size: 2.25rem;
+        }
+    }
+
+    .projects-subtitle {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #6b7280;
+        max-width: 520px;
+    }
+
+    :global(.dark) .projects-subtitle {
+        color: #9ca3af;
+    }
+
+    .projects-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    @media (min-width: 640px) {
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .projects-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .projects-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+    }
+
+    .project-card {
+        border-radius: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: #ffffff;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    :global(.dark) .project-card {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .project-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    :global(.dark) .project-card:hover {
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .project-image {
+        width: 100%;
+        height: 180px;
+        background: #f3f4f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    :global(.dark) .project-image {
+        background: rgba(255, 255, 255, 0.06);
+    }
+
+    .project-image-placeholder {
+        width: 3rem;
+        height: 3rem;
+        color: #9ca3af;
+    }
+
+    :global(.dark) .project-image-placeholder {
+        color: #6b7280;
+    }
+
+    .project-image-placeholder svg {
+        width: 100%;
+        height: 100%;
+    }
+
+    .project-body {
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .project-body h3 {
+        font-family: var(--font-montserrat);
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .project-body h3 {
+        color: var(--color-white);
+    }
+
+    .project-body p {
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        line-height: 1.65;
+        color: #6b7280;
+    }
+
+    :global(.dark) .project-body p {
+        color: #9ca3af;
+    }
+
+    .project-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 0.25rem;
+    }
+
+    .project-tag {
+        font-family: var(--font-pop);
+        font-size: 0.7rem;
+        font-weight: 500;
+        padding: 0.2rem 0.65rem;
+        border-radius: 9999px;
+        background: rgba(185, 58, 5, 0.08);
+        color: var(--color-orange);
+    }
+
+    :global(.dark) .project-tag {
+        background: rgba(210, 96, 41, 0.15);
+    }
+</style>

@@ -1,0 +1,263 @@
+---
+import ScrollAnimation from './ScrollAnimation.jsx';
+---
+
+<section id="servicios" class="services-section">
+    <div class="services-inner">
+        <ScrollAnimation className="services-header" delay={0.2} client:load as="div">
+            <span class="services-badge">¿Qué haremos?</span>
+            <h2 class="services-title">Lo que planeamos ofrecer</h2>
+            <p class="services-subtitle">Actividades diseñadas para todos los niveles, desde quienes nunca han programado hasta quienes quieren ir más lejos.</p>
+        </ScrollAnimation>
+
+        <div class="services-grid">
+            <ScrollAnimation delay={0.3} variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/>
+                            <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/>
+                        </svg>
+                    </div>
+                    <h3>Cursos</h3>
+                    <p>Programas estructurados de programación, diseño web y herramientas digitales con contenido práctico.</p>
+                </div>
+            </ScrollAnimation>
+
+            <ScrollAnimation delay={0.4} variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>
+                        </svg>
+                    </div>
+                    <h3>Talleres</h3>
+                    <p>Sesiones prácticas de corta duración enfocadas en habilidades específicas y proyectos reales.</p>
+                </div>
+            </ScrollAnimation>
+
+            <ScrollAnimation delay={0.5} variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
+                    <h3>Meetups</h3>
+                    <p>Encuentros periódicos para compartir conocimiento, networking y charlas con invitados especiales.</p>
+                </div>
+            </ScrollAnimation>
+
+            <ScrollAnimation delay={0.6} variants={{
+                hidden: { opacity: 0, y: 30 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="service-card">
+                    <div class="service-icon-wrapper">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <h3>Mentoría</h3>
+                    <p>Acompañamiento personalizado con mentores experimentados para guiar tu camino en tecnología.</p>
+                </div>
+            </ScrollAnimation>
+        </div>
+    </div>
+</section>
+
+<style>
+    .services-section {
+        padding: 5rem 2rem;
+        background: #f9fafb;
+    }
+
+    :global(.dark) .services-section {
+        background: #191919;
+    }
+
+    @media (min-width: 768px) {
+        .services-section {
+            padding: 6rem 3rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .services-section {
+            padding: 8rem 4rem;
+        }
+    }
+
+    .services-inner {
+        max-width: 1080px;
+        display: grid;
+        gap: 2rem;
+        margin: 0 auto;
+    }
+
+    .services-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+    }
+
+    .services-badge {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.3rem 0.85rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        border-radius: 9999px;
+        color: var(--color-green-dark);
+        border: 1px solid var(--color-green-dark);
+        font-family: var(--font-pop);
+    }
+
+    :global(.dark) .services-badge {
+        color: var(--color-orange);
+        border-color: var(--color-orange);
+    }
+
+    .services-title {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 1.75rem;
+        line-height: 1.2;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .services-title {
+        color: var(--color-white);
+    }
+
+    @media (min-width: 768px) {
+        .services-title {
+            font-size: 2.25rem;
+        }
+    }
+
+    .services-subtitle {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #6b7280;
+        max-width: 560px;
+    }
+
+    :global(.dark) .services-subtitle {
+        color: #9ca3af;
+    }
+
+    .services-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    @media (min-width: 640px) {
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+        }
+    }
+
+    @media (min-width: 1280px) {
+        .services-grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+    }
+
+    .service-card {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: #ffffff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    :global(.dark) .service-card {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .service-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.1);
+    }
+
+    :global(.dark) .service-card:hover {
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
+    }
+
+    .service-icon-wrapper {
+        width: 2.75rem;
+        height: 2.75rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.75rem;
+        background: rgba(185, 58, 5, 0.1);
+        color: var(--color-orange);
+    }
+
+    :global(.dark) .service-icon-wrapper {
+        background: rgba(210, 96, 41, 0.15);
+    }
+
+    .service-icon-wrapper svg {
+        width: 1.25rem;
+        height: 1.25rem;
+    }
+
+    .service-card h3 {
+        font-family: var(--font-montserrat);
+        font-weight: 600;
+        font-size: 1.05rem;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .service-card h3 {
+        color: var(--color-white);
+    }
+
+    .service-card p {
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        line-height: 1.65;
+        color: #6b7280;
+    }
+
+    :global(.dark) .service-card p {
+        color: #9ca3af;
+    }
+</style>

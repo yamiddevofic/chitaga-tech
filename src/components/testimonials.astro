@@ -1,0 +1,257 @@
+<section class="testimonials-section">
+    <div class="testimonials-inner">
+        <div class="testimonials-header">
+            <span class="testimonials-badge">Testimonios</span>
+            <h2 class="testimonials-title">Lo que dicen nuestros miembros</h2>
+        </div>
+
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>Gracias a Chitaga Tech aprendí a programar desde cero. Ahora trabajo como desarrollador freelance y puedo contribuir a mi comunidad.</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <span>CM</span>
+                    </div>
+                    <div>
+                        <strong>Carlos Mendoza</strong>
+                        <span>Desarrollador Web</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>Los meetups son increíbles. Conecté con personas que comparten mi pasión por la tecnología y juntos estamos creando cosas geniales.</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <span>LR</span>
+                    </div>
+                    <div>
+                        <strong>Laura Ramírez</strong>
+                        <span>Diseñadora UX/UI</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="testimonial-card">
+                <div class="testimonial-quote">
+                    <svg class="quote-icon" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/>
+                    </svg>
+                    <p>La mentoría personalizada me ayudó a conseguir mi primera pasantía en una empresa de tecnología. Chitaga Tech cambia vidas.</p>
+                </div>
+                <div class="testimonial-author">
+                    <div class="testimonial-avatar">
+                        <span>AP</span>
+                    </div>
+                    <div>
+                        <strong>Andrés Peña</strong>
+                        <span>Estudiante de Ingeniería</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<style>
+    .testimonials-section {
+        padding: 5rem 2rem;
+        background: #f9fafb;
+    }
+
+    :global(.dark) .testimonials-section {
+        background: #191919;
+    }
+
+    @media (min-width: 768px) {
+        .testimonials-section {
+            padding: 6rem 3rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .testimonials-section {
+            padding: 8rem 4rem;
+        }
+    }
+
+    .testimonials-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+    }
+
+    .testimonials-header {
+        text-align: center;
+        margin-bottom: 3.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.25rem;
+    }
+
+    .testimonials-badge {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.3rem 0.85rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        border-radius: 9999px;
+        color: var(--color-green-dark);
+        border: 1px solid var(--color-green-dark);
+        font-family: var(--font-pop);
+    }
+
+    :global(.dark) .testimonials-badge {
+        color: var(--color-orange);
+        border-color: var(--color-orange);
+    }
+
+    .testimonials-title {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 1.75rem;
+        line-height: 1.2;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .testimonials-title {
+        color: var(--color-white);
+    }
+
+    @media (min-width: 768px) {
+        .testimonials-title {
+            font-size: 2.25rem;
+        }
+    }
+
+    .testimonials-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    @media (min-width: 640px) {
+        .testimonials-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .testimonials-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .testimonial-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        gap: 2rem;
+        padding: 2rem;
+        border-radius: 1rem;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        background: #ffffff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    :global(.dark) .testimonial-card {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.08);
+    }
+
+    .testimonial-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    :global(.dark) .testimonial-card:hover {
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+
+    .testimonial-quote {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .quote-icon {
+        width: 1.5rem;
+        height: 1.5rem;
+        color: var(--color-orange);
+        opacity: 0.5;
+    }
+
+    .testimonial-quote p {
+        font-family: var(--font-sans);
+        font-size: 0.925rem;
+        line-height: 1.7;
+        color: #4b5563;
+        font-style: italic;
+    }
+
+    :global(.dark) .testimonial-quote p {
+        color: #d1d5db;
+    }
+
+    .testimonial-author {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+    }
+
+    .testimonial-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 50%;
+        background: var(--color-green-dark);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+
+    :global(.dark) .testimonial-avatar {
+        background: var(--color-orange);
+    }
+
+    .testimonial-avatar span {
+        font-family: var(--font-montserrat);
+        font-weight: 600;
+        font-size: 0.75rem;
+        color: #ffffff;
+    }
+
+    .testimonial-author strong {
+        display: block;
+        font-family: var(--font-montserrat);
+        font-weight: 600;
+        font-size: 0.875rem;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .testimonial-author strong {
+        color: var(--color-white);
+    }
+
+    .testimonial-author span {
+        font-family: var(--font-sans);
+        font-size: 0.8rem;
+        color: #6b7280;
+    }
+
+    :global(.dark) .testimonial-author span {
+        color: #9ca3af;
+    }
+</style>

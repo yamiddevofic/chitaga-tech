@@ -1,15 +1,162 @@
+---
+const {
+    title = "Chitagá Tech | Innovación y Tecnología para nuestra comunidad",
+    description = "Chitagá Tech es el epicentro de aprendizaje y desarrollo tecnológico en Norte de Santander. Empoderamos a los jóvenes con habilidades digitales para transformar nuestra región sin tener que abandonar su hogar.",
+    image = "/og-image.png", // Asegúrate de crear una imagen atractiva para compartir
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || Astro.url);
+---
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
+        
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <link rel="canonical" href={canonicalURL} />
+        <meta name="author" content="Comunidad Chitagá Tech" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.url)} />
+
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={canonicalURL} />
+        <meta property="twitter:title" content={title} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+        <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+        <link rel="icon" href="/favicon.ico" />
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/src/styles/global.css">
+    </head>
 	<body>
-		<slot />
+		<div id="container">
+        <header id="site-header">
+            <div class="header-inner">
+                <a href="#inicio" class="header-brand">
+                    <img src="/favicon.ico" alt="Chitaga Tech" class="header-icon" />
+                    <span class="header-name">Chitaga Tech</span>
+                </a>
+
+                <!-- Nav desktop -->
+                <nav class="nav-desktop">
+                    <ul>
+                        <li><a href="#inicio" class="nav-link active">Inicio</a></li>
+                        <li><a href="#nosotros" class="nav-link">Nosotros</a></li>
+                        <li><a href="#servicios" class="nav-link">Servicios</a></li>
+                        <li><a href="#proyectos" class="nav-link">Proyectos</a></li>
+                        <li><a href="#contacto" class="nav-link">Contacto</a></li>
+                    </ul>
+                </nav>
+
+                <!-- Hamburger button -->
+                <button id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Mobile overlay menu -->
+        <div id="mobile-overlay" class="mobile-overlay">
+            <nav class="mobile-nav">
+                <ul>
+                    <li><a href="#inicio">Inicio</a></li>
+                    <li><a href="#nosotros">Nosotros</a></li>
+                    <li><a href="#servicios">Servicios</a></li>
+                    <li><a href="#proyectos">Proyectos</a></li>
+                    <li><a href="#contacto">Contacto</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <script>
+            const toggle = document.getElementById('menu-toggle');
+            const overlay = document.getElementById('mobile-overlay');
+            const body = document.body;
+
+            toggle?.addEventListener('click', () => {
+                const isOpen = toggle.classList.contains('is-active');
+                toggle.classList.toggle('is-active');
+                overlay?.classList.toggle('is-open');
+                body.style.overflow = isOpen ? '' : 'hidden';
+                toggle.setAttribute('aria-expanded', String(!isOpen));
+            });
+
+            // Close menu on link click
+            overlay?.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggle?.classList.remove('is-active');
+                    overlay?.classList.remove('is-open');
+                    body.style.overflow = '';
+                    toggle?.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // Header: transparente arriba, glassmorphism al scrollear
+            const header = document.getElementById('site-header');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    header?.classList.add('scrolled');
+                } else {
+                    header?.classList.remove('scrolled');
+                }
+            });
+        </script>
+        <main>
+			<slot />
+        </main>
+        <footer id="site-footer">
+            <div class="footer-inner">
+                <!-- Brand -->
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <img src="/favicon.ico" alt="Chitaga Tech" class="footer-icon" />
+                        <span class="footer-name">Chitaga Tech</span>
+                    </div>
+                    <p class="footer-tagline">Innovación y tecnología para nuestra comunidad.</p>
+                </div>
+
+                <!-- Links -->
+                <div class="footer-links">
+                    <div class="footer-col">
+                        <h4>Navegación</h4>
+                        <ul>
+                            <li><a href="#inicio">Inicio</a></li>
+                            <li><a href="#nosotros">Nosotros</a></li>
+                            <li><a href="#servicios">Servicios</a></li>
+                            <li><a href="#proyectos">Proyectos</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-col">
+                        <h4>Redes</h4>
+                        <ul>
+                            <li><a href="#" aria-label="Facebook">Facebook</a></li>
+                            <li><a href="#" aria-label="Instagram">Instagram</a></li>
+                            <li><a href="#" aria-label="GitHub">GitHub</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Divider + copyright -->
+            <div class="footer-bottom">
+                <p>&copy; 2026 Chitaga Tech. Todos los derechos reservados.</p>
+            </div>
+        </footer>
+    </div>
 	</body>
 </html>
 

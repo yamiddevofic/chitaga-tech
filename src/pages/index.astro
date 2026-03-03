@@ -1,11 +1,22 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Layout from "../layouts/Layout.astro";
+import ButtonToggle from "../components/buttonToggle.jsx";
+import Hero from "../components/hero.astro";
+import About from "../components/about.astro";
+import Services from "../components/services.astro";
+import Stats from "../components/stats.astro";
+import Projects from "../components/projects.astro";
+import Testimonials from "../components/testimonials.astro";
+import Contact from "../components/contact.astro";
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Chitagá Tech - Comunidad de Tecnología">
+    <ButtonToggle client:load/>
+    <Hero />
+    <About />
+    <Services />
+    <Stats />
+    <Projects />
+    <!-- <Testimonials /> -->
+    <Contact />
 </Layout>

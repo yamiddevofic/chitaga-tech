@@ -1,0 +1,262 @@
+---
+import ScrollAnimation from './ScrollAnimation.jsx';
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    cta?: string;
+    ctaHref?: string;
+    imgSrc?: string;
+    imgDarkSrc?: string;
+    imgAlt?: string;
+}
+
+const {
+    title = "Llevemos la tecnología a Chitagá",
+    subtitle = "Estamos creando la primera comunidad educativa de tecnología en nuestro municipio. Queremos formar, conectar e inspirar a quienes creen en el poder de lo digital.",
+    cta = "Únete al proyecto",
+    ctaHref = "#contacto",
+    imgSrc = "/parque.jpg",
+    imgDarkSrc = "/parque.jpg",
+    imgAlt = "Tecnología e innovación",
+} = Astro.props;
+---
+
+<section id="inicio" class="hero-section">
+    <div class="hero-inner">
+        <ScrollAnimation className="hero-content" delay={0.2} client:load as="div">
+            <span class="hero-badge">Comunidad Tecnológica</span>
+            <h2 class="hero-title">{title}</h2>
+            <p class="hero-subtitle">{subtitle}</p>
+            <div class="hero-actions">
+                <a href={ctaHref} class="hero-cta">{cta}</a>
+                <a href="#nosotros" class="hero-cta-secondary">Conoce la propuesta &rarr;</a>
+            </div>
+        </ScrollAnimation>
+
+        <ScrollAnimation delay={0.4} variants={{
+            hidden: { opacity: 0, scale: 0.9 },
+            visible: { opacity: 1, scale: 1 }
+        }} client:load as="div">
+            <div class="hero-image-wrapper">
+                <img src={imgSrc} alt={imgAlt} class="hero-img hero-img-light" loading="eager" />
+                <img src={imgDarkSrc} alt={imgAlt} class="hero-img hero-img-dark" loading="eager" />
+            </div>
+        </ScrollAnimation>
+    </div>
+</section>
+
+<style>
+    /* Light/dark image toggle */
+    .hero-img-light { display: block; }
+    .hero-img-dark  { display: none;  }
+    :global(.dark) .hero-img-light { display: none;  }
+    :global(.dark) .hero-img-dark  { display: block; }
+
+    .hero-section {
+        padding: 2rem 2rem 5rem;
+        background: #ffffff;
+    }
+
+    :global(.dark) .hero-section {
+        background: #191919;
+    }
+
+    @media (min-width: 768px) {
+        .hero-section {
+            padding: 3rem 3rem 6rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .hero-section {
+            padding: 4rem 4rem 8rem;
+        }
+    }
+
+    .hero-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: grid;
+        gap: 2rem;
+        align-items: center;
+    }
+
+    @media (min-width: 768px) {
+        .hero-inner {
+            flex-direction: row;
+            gap: 4rem;
+            align-items: center;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .hero-inner {
+            gap: 5rem;
+        }
+    }
+
+    /* Content */
+    .hero-content {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        flex: 1;
+        align-items: center;
+        text-align: center;
+    }
+
+    @media (min-width: 768px) {
+        .hero-content {
+            align-items: flex-start;
+            text-align: left;
+        }
+    }
+
+    /* Badge */
+    .hero-badge {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.3rem 0.85rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        border-radius: 9999px;
+        color: var(--color-green-dark);
+        border: 1px solid var(--color-green-dark);
+        font-family: var(--font-pop);
+    }
+
+    :global(.dark) .hero-badge {
+        color: var(--color-orange);
+        border-color: var(--color-orange);
+    }
+
+    @media (min-width: 1024px) {
+        .hero-badge {
+            font-size: 0.75rem;
+        }
+    }
+
+    /* Title */
+    .hero-title {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        line-height: 1.1;
+        font-size: 2.25rem;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .hero-title {
+        color: var(--color-white);
+    }
+
+    @media (min-width: 640px) {
+        .hero-title { font-size: 2.75rem; }
+    }
+    @media (min-width: 768px) {
+        .hero-title { font-size: 3rem; }
+    }
+    @media (min-width: 1024px) {
+        .hero-title { font-size: 3.75rem; }
+    }
+
+    /* Subtitle */
+    .hero-subtitle {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.7;
+        color: #4b5563;
+        max-width: 28rem;
+    }
+
+    :global(.dark) .hero-subtitle {
+        color: #d1d5db;
+    }
+
+    @media (min-width: 768px) {
+        .hero-subtitle { font-size: 1.125rem; }
+    }
+
+    /* Actions */
+    .hero-actions {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 1.25rem;
+        margin-top: 1rem;
+    }
+
+    @media (min-width: 768px) {
+        .hero-actions {
+            justify-content: flex-start;
+        }
+    }
+
+    .hero-cta {
+        display: inline-block;
+        padding: 0.75rem 2rem;
+        background: var(--color-orange);
+        color: #fff;
+        font-family: var(--font-pop);
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 0.5rem;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .hero-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(185, 58, 5, 0.3);
+    }
+
+    .hero-cta-secondary {
+        display: inline-block;
+        padding: 0.75rem 0.5rem;
+        font-family: var(--font-pop);
+        font-weight: 500;
+        font-size: 0.9rem;
+        color: var(--color-green-dark);
+        transition: color 0.2s ease;
+    }
+
+    :global(.dark) .hero-cta-secondary {
+        color: var(--color-white);
+    }
+
+    .hero-cta-secondary:hover {
+        color: var(--color-orange);
+    }
+
+    /* Image */
+    .hero-image-wrapper {
+        flex-shrink: 0;
+        width: 100%;
+        max-width: 480px;
+        border-radius: 1rem;
+        overflow: hidden;
+        aspect-ratio: 4 / 3;
+    }
+
+    @media (min-width: 768px) {
+        .hero-image-wrapper {
+            width: 50%;
+            max-width: none;
+            aspect-ratio: auto;
+            height: 420px;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .hero-image-wrapper {
+            height: 480px;
+        }
+    }
+
+    .hero-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+</style>

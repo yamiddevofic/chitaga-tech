@@ -1,0 +1,154 @@
+---
+import ScrollAnimation from './ScrollAnimation.jsx';
+---
+
+<section class="stats-section">
+    <div class="stats-inner">
+        <ScrollAnimation delay={0.2} variants={{
+            hidden: { opacity: 0, y: 20 },
+            visible: { opacity: 1, y: 0 }
+        }} client:load as="div">
+            <p class="stats-label">Nuestro objetivo para el primer año</p>
+        </ScrollAnimation>
+        <div class="stats-row">
+            <ScrollAnimation delay={0.3} variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1 }
+            }} client:load as="div">
+                <div class="stat-item">
+                    <span class="stat-number">50</span>
+                    <span class="stat-desc">miembros activos</span>
+                </div>
+            </ScrollAnimation>
+            <div class="stat-divider"></div>
+            <ScrollAnimation delay={0.4} variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1 }
+            }} client:load as="div">
+                <div class="stat-item">
+                    <span class="stat-number">4</span>
+                    <span class="stat-desc">cursos gratuitos</span>
+                </div>
+            </ScrollAnimation>
+            <div class="stat-divider"></div>
+            <ScrollAnimation delay={0.5} variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1 }
+            }} client:load as="div">
+                <div class="stat-item">
+                    <span class="stat-number">10</span>
+                    <span class="stat-desc">talleres prácticos</span>
+                </div>
+            </ScrollAnimation>
+            <div class="stat-divider"></div>
+            <ScrollAnimation delay={0.6} variants={{
+                hidden: { opacity: 0, scale: 0.8 },
+                visible: { opacity: 1, scale: 1 }
+            }} client:load as="div">
+                <div class="stat-item">
+                    <span class="stat-number">1</span>
+                    <span class="stat-desc">proyecto comunitario</span>
+                </div>
+            </ScrollAnimation>
+        </div>
+    </div>
+</section>
+
+<style>
+    .stats-section {
+        padding: 4rem 2rem;
+        background: var(--color-green-dark);
+    }
+
+    :global(.dark) .stats-section {
+        background: #191919;
+    }
+
+    @media (min-width: 768px) {
+        .stats-section {
+            padding: 5rem 3rem;
+        }
+    }
+
+    @media (min-width: 1024px) {
+        .stats-section {
+            padding: 5rem 4rem;
+        }
+    }
+
+    .stats-inner {
+        max-width: 1080px;
+        margin: 0 auto;
+        display: grid;
+        align-items: center;
+        gap: 2rem;
+    }
+
+    .stats-label {
+        font-family: var(--font-pop);
+        font-size: 0.75rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        color: rgba(255, 255, 255, 0.5);
+    }
+
+    .stats-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2rem;
+        width: 100%;
+    }
+
+    @media (min-width: 640px) {
+        .stats-row {
+            flex-direction: row;
+            justify-content: center;
+            gap: 0;
+        }
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.5rem;
+        flex: 1;
+        text-align: center;
+    }
+
+    .stat-number {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 2.5rem;
+        line-height: 1;
+        color: #ffffff;
+    }
+
+    @media (min-width: 768px) {
+        .stat-number {
+            font-size: 3rem;
+        }
+    }
+
+    .stat-desc {
+        font-family: var(--font-sans);
+        font-size: 0.875rem;
+        color: rgba(255, 255, 255, 0.7);
+        letter-spacing: 0.02em;
+    }
+
+    .stat-divider {
+        display: none;
+    }
+
+    @media (min-width: 640px) {
+        .stat-divider {
+            display: block;
+            width: 1px;
+            height: 3.5rem;
+            background: rgba(255, 255, 255, 0.15);
+        }
+    }
+</style>
