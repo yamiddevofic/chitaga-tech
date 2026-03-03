@@ -54,7 +54,7 @@ const {
     :global(.dark) .hero-img-dark  { display: block; }
 
     .hero-section {
-        padding: 2rem 2rem 5rem;
+        padding: 3rem 2rem 4rem;
         background: #ffffff;
     }
 
@@ -64,13 +64,13 @@ const {
 
     @media (min-width: 768px) {
         .hero-section {
-            padding: 3rem 3rem 6rem;
+            padding: 4rem 3rem 5rem;
         }
     }
 
     @media (min-width: 1024px) {
         .hero-section {
-            padding: 3rem 4rem 4rem;
+            padding: 5rem 4rem 6rem;
         }
     }
 
@@ -80,6 +80,7 @@ const {
         display: grid;
         gap: 2rem;
         align-items: center;
+        width: 100%;
     }
 
     @media (min-width: 768px) {
@@ -237,14 +238,7 @@ const {
         .hero-image-wrapper {
             width: 100%;
             max-width: none;
-            aspect-ratio: auto;
-            height: 420px;
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .hero-image-wrapper {
-            height: 400px;
+            aspect-ratio: 4 / 3;
         }
     }
 
