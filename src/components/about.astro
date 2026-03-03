@@ -100,14 +100,14 @@ import ScrollAnimation from './ScrollAnimation.jsx';
 
     @media (min-width: 768px) {
         .about-inner {
-            flex-direction: row;
+            grid-template-columns: 1fr auto;
             align-items: center;
             gap: 5rem;
         }
     }
 
-    .about-text {
-        flex: 1;
+    /* :global() needed because this class is on a React-rendered element */
+    :global(.about-text) {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;

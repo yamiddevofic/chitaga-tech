@@ -86,14 +86,14 @@ import ScrollAnimation from './ScrollAnimation.jsx';
 
     @media (min-width: 768px) {
         .contact-inner {
-            flex-direction: row;
-            align-items: flex-start;
+            grid-template-columns: 1fr 1fr;
+            align-items: start;
             gap: 5rem;
         }
     }
 
-    .contact-info {
-        flex: 1;
+    /* :global() needed because this class is on a React-rendered element */
+    :global(.contact-info) {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;

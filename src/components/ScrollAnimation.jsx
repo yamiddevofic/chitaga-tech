@@ -1,15 +1,16 @@
 import { motion, useInView } from 'framer-motion';
 import { useRef } from 'react';
 
-const ScrollAnimation = ({ 
-  children, 
+const ScrollAnimation = ({
+  children,
   variants = {},
   initial = "hidden",
   animate = "visible",
   transition = { duration: 0.6, ease: "easeOut" },
   className = "",
   delay = 0,
-  as = "div"
+  as = "div",
+  style = {}
 }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { 
@@ -34,16 +35,7 @@ const ScrollAnimation = ({
       variants={animationVariants}
       transition={{ ...transition, delay }}
       className={className}
-      style={{ 
-        display: 'inherit',
-        flexDirection: 'inherit',
-        alignItems: 'inherit',
-        justifyContent: 'inherit',
-        gap: 'inherit',
-        flex: 'inherit',
-        width: 'inherit',
-        height: 'inherit'
-      }}
+      style={style}
     >
       {children}
     </MotionComponent>

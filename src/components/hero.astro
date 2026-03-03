@@ -84,9 +84,8 @@ const {
 
     @media (min-width: 768px) {
         .hero-inner {
-            flex-direction: row;
+            grid-template-columns: 1fr 1fr;
             gap: 4rem;
-            align-items: center;
         }
     }
 
@@ -96,18 +95,17 @@ const {
         }
     }
 
-    /* Content */
-    .hero-content {
+    /* Content — :global() needed because this class is on a React-rendered element */
+    :global(.hero-content) {
         display: flex;
         flex-direction: column;
         gap: 1.5rem;
-        flex: 1;
         align-items: center;
         text-align: center;
     }
 
     @media (min-width: 768px) {
-        .hero-content {
+        :global(.hero-content) {
             align-items: flex-start;
             text-align: left;
         }
@@ -241,7 +239,7 @@ const {
 
     @media (min-width: 768px) {
         .hero-image-wrapper {
-            width: 50%;
+            width: 100%;
             max-width: none;
             aspect-ratio: auto;
             height: 420px;

@@ -120,7 +120,8 @@ import ScrollAnimation from './ScrollAnimation.jsx';
         margin: 0 auto;
     }
 
-    .projects-header {
+    /* :global() needed because this class is on a React-rendered element */
+    :global(.projects-header) {
         text-align: center;
         margin-bottom: 3.5rem;
         display: flex;
