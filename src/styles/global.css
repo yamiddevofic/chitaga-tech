@@ -57,31 +57,12 @@ dark {
 }
 
 #site-header.scrolled {
-    background: var(--color-green-dark);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-}
-
-#site-header.scrolled .header-name,
-#site-header.scrolled .nav-link,
-#site-header.scrolled .nav-link.active {
-    color: rgba(255, 255, 255, 0.85);
-}
-
-#site-header.scrolled .nav-link:hover,
-#site-header.scrolled .nav-link.active {
-    color: #ffffff;
-}
-
-#site-header.scrolled .header-icon {
-    filter: brightness(0) invert(1);
-}
-
-#site-header.scrolled #menu-toggle span {
     background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 :where(.dark, .dark *) #site-header.scrolled {
-    background: #111111;
+    background: #191919;
     border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 

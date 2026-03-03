@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import { FaSun, FaMoon } from "react-icons/fa";
 
 const buttonToggle = () => {
-    const [theme, setTheme] = useState("dark");
+    const [theme, setTheme] = useState("light");
     
     return (
         <button 
