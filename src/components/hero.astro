@@ -12,25 +12,25 @@ interface Props {
 }
 
 const {
-    title = "Llevemos la tecnología a Chitagá",
-    subtitle = "Estamos creando la primera comunidad de tecnología en nuestro municipio. Queremos formar, conectar e inspirar a quienes creen en el poder de lo digital.",
-    cta = "Únete al proyecto",
+    title = "Tu futuro no debería depender de irte de Chitagá",
+    subtitle = "Somos profesionales chitagüenses construyendo el primer espacio de tecnología hecho por y para nuestra gente. Para que quedarte sea una elección, no una limitación.",
+    cta = "Quiero ser parte",
     ctaHref = "#contacto",
     imgSrc = "/parque.jpg",
     imgDarkSrc = "/parque.jpg",
-    imgAlt = "Tecnología e innovación",
+    imgAlt = "Chitagá, Norte de Santander",
 } = Astro.props;
 ---
 
 <section id="inicio" class="hero-section">
     <div class="hero-inner">
         <ScrollAnimation className="hero-content" delay={0.2} client:load as="div">
-            <span class="hero-badge">Comunidad Tecnológica</span>
+            <span class="hero-badge">De Chitagüenses, para Chitagüenses</span>
             <h1 class="hero-title">{title}</h1>
             <p class="hero-subtitle">{subtitle}</p>
             <div class="hero-actions">
                 <a href={ctaHref} class="hero-cta">{cta}</a>
-                <a href="#nosotros" class="hero-cta-secondary">Conoce la propuesta &rarr;</a>
+                <a href="#nosotros" class="hero-cta-secondary">Conoce por qué lo hacemos &rarr;</a>
             </div>
         </ScrollAnimation>
 
@@ -70,7 +70,7 @@ const {
 
     @media (min-width: 1024px) {
         .hero-section {
-            padding: 4rem 4rem 8rem;
+            padding: 3rem 4rem 4rem;
         }
     }
 
@@ -99,7 +99,7 @@ const {
     :global(.hero-content) {
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1.25rem;
         align-items: flex-start;
         text-align: left;
     }
@@ -150,7 +150,10 @@ const {
         .hero-title { font-size: 3rem; }
     }
     @media (min-width: 1024px) {
-        .hero-title { font-size: 3.75rem; }
+        .hero-title { font-size: 3rem; }
+    }
+    @media (min-width: 1280px) {
+        .hero-title { font-size: 3.25rem; }
     }
 
     /* Subtitle */
@@ -241,7 +244,7 @@ const {
 
     @media (min-width: 1024px) {
         .hero-image-wrapper {
-            height: 480px;
+            height: 400px;
         }
     }
 
