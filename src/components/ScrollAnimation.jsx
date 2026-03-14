@@ -1,5 +1,5 @@
 import { motion, useInView } from 'framer-motion';
-import { useRef } from 'react';
+import { useRef, useState, useEffect } from 'react';
 
 const ScrollAnimation = ({
   children,
@@ -13,11 +13,23 @@ const ScrollAnimation = ({
   style = {}
 }) => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { 
-    once: true, 
-    amount: 0.3, // Se activa cuando 30% del elemento es visible
-    margin: "0px 0px -100px 0px" // Margen negativo para activar antes
+  const [initiallyVisible, setInitiallyVisible] = useState(false);
+  const isInView = useInView(ref, {
+    once: true,
+    amount: 0.1,
+    margin: "0px 0px -50px 0px"
   });
+
+  // Al montar, verificar si el elemento ya está en el viewport
+  useEffect(() => {
+    if (ref.current) {
+      const rect = ref.current.getBoundingClientRect();
+      const inViewport = rect.top < window.innerHeight && rect.bottom > 0;
+      if (inViewport) {
+        setInitiallyVisible(true);
+      }
+    }
+  }, []);
 
   const defaultVariants = {
     hidden: { opacity: 0, y: 50 },
@@ -30,10 +42,10 @@ const ScrollAnimation = ({
   return (
     <MotionComponent
       ref={ref}
-      initial={initial}
-      animate={isInView ? animate : initial}
+      initial={initiallyVisible ? "visible" : initial}
+      animate={isInView || initiallyVisible ? animate : initial}
       variants={animationVariants}
-      transition={{ ...transition, delay }}
+      transition={initiallyVisible ? { duration: 0 } : { ...transition, delay }}
       className={className}
       style={style}
     >

@@ -2,12 +2,12 @@
 import '../styles/global.css';
 
 const {
-    title = "Chitagá Tech | Comunidad de Tecnología e Innovación en Chitagá, Norte de Santander",
-    description = "Profesionales chitagüenses creando oportunidades reales en tecnología para que nadie tenga que irse del municipio. Cursos, talleres, mentoría y proyectos desde Chitagá para el mundo.",
+    title = "Chitagá Tech — Que irse sea opción, no obligación | Comunidad Tech en Chitagá, Norte de Santander",
+    description = "Comunidad de profesionales chitagüenses que construyen oportunidades reales en tecnología. Cursos de programación, talleres digitales, mentoría y proyectos para que quedarte en Chitagá sea una elección, no una limitación.",
     image = "/og-image.png",
 } = Astro.props;
 
-const siteUrl = Astro.site || new URL(Astro.url.origin);
+const siteUrl = new URL("https://chitaga.tech");
 const canonicalURL = new URL(Astro.url.pathname, siteUrl);
 const ogImageURL = new URL(image, siteUrl);
 
@@ -15,15 +15,26 @@ const jsonLd = {
     "@context": "https://schema.org",
     "@type": "Organization",
     "name": "Chitagá Tech",
-    "url": canonicalURL.href,
+    "alternateName": "Chitaga Tech",
+    "url": "https://chitaga.tech",
     "logo": new URL("/favicon.ico", siteUrl).href,
-    "description": "Comunidad de tecnología creada por profesionales chitagüenses para formar talento y crear oportunidades en Chitagá, Norte de Santander.",
+    "description": "Comunidad de tecnología creada por profesionales chitagüenses para formar talento digital y crear oportunidades laborales en Chitagá, Norte de Santander, Colombia.",
+    "slogan": "Que irse sea opción, no obligación",
+    "foundingLocation": {
+        "@type": "Place",
+        "name": "Chitagá, Norte de Santander, Colombia"
+    },
     "address": {
         "@type": "PostalAddress",
         "addressLocality": "Chitagá",
         "addressRegion": "Norte de Santander",
         "addressCountry": "CO"
     },
+    "areaServed": {
+        "@type": "Place",
+        "name": "Chitagá, Norte de Santander"
+    },
+    "knowsAbout": ["tecnología", "programación", "desarrollo web", "formación digital", "innovación rural"],
     "sameAs": []
 };
 ---
@@ -40,7 +51,11 @@ const jsonLd = {
         <meta name="author" content="Comunidad Chitagá Tech" />
         <meta name="robots" content="index, follow" />
         <meta name="theme-color" content="#184014" />
-        <meta name="keywords" content="tecnología Chitagá, programación Norte de Santander, cursos tecnología Chitagá, comunidad tech Colombia, aprender programación gratis, talleres digitales Chitagá" />
+        <meta name="keywords" content="Chitagá Tech, tecnología Chitagá, programación Chitagá, cursos programación Norte de Santander, comunidad tech Colombia, aprender programación gratis, talleres digitales Chitagá, desarrollo web Chitagá, innovación rural Colombia, empleo tecnología Chitagá, formación digital Norte de Santander" />
+        <meta name="geo.region" content="CO-NSA" />
+        <meta name="geo.placename" content="Chitagá, Norte de Santander" />
+        <meta name="geo.position" content="7.1383;-72.6614" />
+        <meta name="ICBM" content="7.1383, -72.6614" />
 
         <!-- Open Graph -->
         <meta property="og:type" content="website" />
@@ -58,7 +73,7 @@ const jsonLd = {
         <meta name="twitter:url" content={canonicalURL} />
         <meta name="twitter:title" content={title} />
         <meta name="twitter:description" content={description} />
-        <meta name="twitter:image" content={ogImageURL} />
+        <meta name="twitter:image" content={ogImageURL.href || ''} />
 
         <!-- Favicon & Apple Touch -->
         <link rel="icon" href="/favicon.ico" sizes="32x32" />
@@ -78,7 +93,10 @@ const jsonLd = {
             <div class="header-inner">
                 <a href="#inicio" class="header-brand">
                     <img src="/favicon.ico" alt="Chitaga Tech" class="header-icon" />
-                    <span class="header-name">Chitaga Tech</span>
+                    <div class="header-text">
+                        <span class="header-name">Chitaga Tech</span>
+                        <span class="header-slogan">Que irse sea opción, no obligación</span>
+                    </div>
                 </a>
 
                 <!-- Nav desktop -->
