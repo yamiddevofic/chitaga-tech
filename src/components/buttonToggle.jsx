@@ -15,12 +15,9 @@ const buttonToggle = () => {
                 toggleTheme();
             }}
             style={{
-                fontSize: '1.25rem',
-                padding: '0.75rem 1rem',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'center',
-                gap: '0.5rem'
             }}
         >
             {theme === "light" ? <FaSun size={20} /> : <FaMoon size={20} />}
