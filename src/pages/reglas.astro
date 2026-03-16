@@ -137,23 +137,34 @@ import ButtonToggle from "../components/buttonToggle.jsx";
 
 <style>
     .rules-hero {
-        padding: 6rem 2rem 3rem;
-        background: #ffffff;
+        position: relative;
+        padding: 8rem 2rem 4rem;
+        background: url('/parque.jpg') center/cover no-repeat;
+        overflow: hidden;
     }
 
-    :global(.dark) .rules-hero {
-        background: #191919;
+    .rules-hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.65);
+    }
+
+    :global(.dark) .rules-hero::before {
+        background: rgba(0, 0, 0, 0.78);
     }
 
     @media (min-width: 768px) {
-        .rules-hero { padding: 8rem 3rem 4rem; }
+        .rules-hero { padding: 10rem 3rem 5rem; }
     }
 
     @media (min-width: 1024px) {
-        .rules-hero { padding: 10rem 4rem 4rem; }
+        .rules-hero { padding: 12rem 4rem 6rem; }
     }
 
     .rules-hero-inner {
+        position: relative;
+        z-index: 1;
         max-width: 720px;
         margin: 0 auto;
         display: flex;
@@ -167,13 +178,13 @@ import ButtonToggle from "../components/buttonToggle.jsx";
         font-family: var(--font-pop);
         font-size: 0.85rem;
         font-weight: 500;
-        color: var(--color-orange);
-        transition: opacity 0.2s ease;
+        color: rgba(255, 255, 255, 0.8);
+        transition: color 0.2s ease;
         margin-bottom: 0.5rem;
     }
 
     .rules-back:hover {
-        opacity: 0.7;
+        color: var(--color-orange);
     }
 
     .rules-badge {
@@ -185,14 +196,9 @@ import ButtonToggle from "../components/buttonToggle.jsx";
         text-transform: uppercase;
         letter-spacing: 0.15em;
         border-radius: 9999px;
-        color: var(--color-green-dark);
-        border: 1px solid var(--color-green-dark);
+        color: #ffffff;
+        border: 1px solid rgba(255, 255, 255, 0.4);
         font-family: var(--font-pop);
-    }
-
-    :global(.dark) .rules-badge {
-        color: var(--color-orange);
-        border-color: var(--color-orange);
     }
 
     .rules-title {
@@ -200,11 +206,7 @@ import ButtonToggle from "../components/buttonToggle.jsx";
         font-weight: 700;
         font-size: 2.25rem;
         line-height: 1.15;
-        color: var(--color-green-dark);
-    }
-
-    :global(.dark) .rules-title {
-        color: var(--color-white);
+        color: #ffffff;
     }
 
     @media (min-width: 768px) {
@@ -215,12 +217,8 @@ import ButtonToggle from "../components/buttonToggle.jsx";
         font-family: var(--font-sans);
         font-size: 1.05rem;
         line-height: 1.75;
-        color: #6b7280;
+        color: rgba(255, 255, 255, 0.75);
         max-width: 600px;
-    }
-
-    :global(.dark) .rules-subtitle {
-        color: #a1a1aa;
     }
 
     /* Content */
