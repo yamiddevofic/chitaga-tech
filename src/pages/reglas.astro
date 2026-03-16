@@ -1,0 +1,407 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ButtonToggle from "../components/buttonToggle.jsx";
+---
+
+<Layout
+    title="Reglas de la Comunidad — Chitagá Tech"
+    description="Las reglas que nos permiten crecer juntos en un espacio seguro, respetuoso e inclusivo. Conoce los principios que guían a la comunidad Chitagá Tech."
+>
+    <ButtonToggle client:load/>
+
+    <section class="rules-hero">
+        <div class="rules-hero-inner">
+            <a href="/" class="rules-back">&larr; Volver al inicio</a>
+            <span class="rules-badge">Nuestro acuerdo</span>
+            <h1 class="rules-title">Las reglas que nos hacen comunidad</h1>
+            <p class="rules-subtitle">
+                Estas reglas no son restricciones. Son el cimiento de un espacio donde cada persona se siente segura para aprender, equivocarse y crecer. Las escribimos juntos y las cuidamos entre todos.
+            </p>
+        </div>
+    </section>
+
+    <section class="rules-content">
+        <div class="rules-inner">
+
+            <div class="rules-intro">
+                <p>Chitagá Tech existe porque creemos que nuestra gente merece un lugar donde pueda ser ella misma, preguntar sin miedo y construir sin juicio. Estas reglas protegen eso. Al ser parte de esta comunidad, te comprometes a vivirlas.</p>
+            </div>
+
+            <div class="rules-group">
+                <div class="rules-group-header">
+                    <span class="rules-group-number">01</span>
+                    <h2>Respeto y trato digno</h2>
+                </div>
+                <p class="rules-group-desc">La base de todo. Sin respeto no hay comunidad.</p>
+                <ul class="rules-list">
+                    <li>Dirige cada palabra con educación, amabilidad y empatía. Detrás de cada pantalla hay una persona.</li>
+                    <li>No se toleran agresiones, acoso verbal o psicológico, groserías ni comentarios hirientes.</li>
+                    <li>Respeta las diferentes formas de pensar, los distintos niveles de experiencia y los ritmos de aprendizaje de cada persona.</li>
+                    <li>Las críticas son bienvenidas cuando son constructivas. La burla, nunca.</li>
+                </ul>
+            </div>
+
+            <div class="rules-group">
+                <div class="rules-group-header">
+                    <span class="rules-group-number">02</span>
+                    <h2>Seguridad psicológica</h2>
+                </div>
+                <p class="rules-group-desc">Este es un espacio donde equivocarse está bien.</p>
+                <ul class="rules-list">
+                    <li>No existen las malas preguntas. Toda duda es válida y merece ser atendida con paciencia.</li>
+                    <li>Nadie será juzgado por su nivel de conocimiento. Todos estamos aprendiendo, incluso quienes enseñan.</li>
+                    <li>Comparte tus ideas sin miedo. Aquí tu voz importa y tu perspectiva enriquece a los demás.</li>
+                    <li>Si alguien se equivoca, ayúdale. No señales el error, muestra el camino.</li>
+                </ul>
+            </div>
+
+            <div class="rules-group">
+                <div class="rules-group-header">
+                    <span class="rules-group-number">03</span>
+                    <h2>Participación y compromiso</h2>
+                </div>
+                <p class="rules-group-desc">Una comunidad crece cuando sus miembros se involucran.</p>
+                <ul class="rules-list">
+                    <li>Participa activamente en las actividades, talleres y conversaciones. Tu presencia fortalece al grupo.</li>
+                    <li>Si te comprometes con una tarea o actividad, cumple. Los demás cuentan contigo.</li>
+                    <li>Dirige tus intervenciones al tema que se está abordando. El enfoque nos permite avanzar juntos.</li>
+                    <li>Si no puedes asistir o cumplir con algo, comunícalo con tiempo. La transparencia genera confianza.</li>
+                </ul>
+            </div>
+
+            <div class="rules-group">
+                <div class="rules-group-header">
+                    <span class="rules-group-number">04</span>
+                    <h2>Colaboración y ayuda mutua</h2>
+                </div>
+                <p class="rules-group-desc">Aquí nadie camina solo. Nos apoyamos entre todos.</p>
+                <ul class="rules-list">
+                    <li>Cuando alguien tenga dificultades, tiende la mano. Lo que para ti es obvio, para otro puede ser un gran descubrimiento.</li>
+                    <li>Comparte lo que sabes sin esperar nada a cambio. El conocimiento crece cuando se regala.</li>
+                    <li>Escucha antes de responder. Entender el problema es más valioso que dar una respuesta rápida.</li>
+                    <li>Celebra los logros de los demás como si fueran propios. El éxito de uno es el éxito de todos.</li>
+                </ul>
+            </div>
+
+            <div class="rules-group">
+                <div class="rules-group-header">
+                    <span class="rules-group-number">05</span>
+                    <h2>Espacios virtuales y presenciales</h2>
+                </div>
+                <p class="rules-group-desc">Las mismas reglas aplican en persona y en pantalla.</p>
+                <ul class="rules-list">
+                    <li>En videollamadas, usa la función de levantar la mano para hacer preguntas. Esto mantiene el orden y asegura que todos sean escuchados.</li>
+                    <li>Pide permiso antes de compartir tu pantalla.</li>
+                    <li>Si enciendes la cámara, asegúrate de que el entorno sea apropiado para el momento.</li>
+                    <li>En chats y foros, mantén un tono respetuoso. Lo escrito permanece y puede ser malinterpretado: elige bien tus palabras.</li>
+                </ul>
+            </div>
+
+            <div class="rules-group">
+                <div class="rules-group-header">
+                    <span class="rules-group-number">06</span>
+                    <h2>Comunicación y resolución de conflictos</h2>
+                </div>
+                <p class="rules-group-desc">Los desacuerdos son normales. Lo que importa es cómo los resolvemos.</p>
+                <ul class="rules-list">
+                    <li>Comunica tus inconformidades, opiniones o reclamos de forma asertiva, sin buscar herir a nadie.</li>
+                    <li>Si tienes un conflicto con otro miembro, intenta resolverlo primero en privado y con respeto.</li>
+                    <li>Si no se resuelve, reporta la situación a un administrador. Estamos aquí para mediar.</li>
+                    <li>Reporta cualquier incidente o falta a estas reglas. Proteger la comunidad es responsabilidad de todos.</li>
+                </ul>
+            </div>
+
+            <div class="rules-group">
+                <div class="rules-group-header">
+                    <span class="rules-group-number">07</span>
+                    <h2>Inclusión y pertenencia</h2>
+                </div>
+                <p class="rules-group-desc">Chitagá Tech es de todos los que creen en Chitagá.</p>
+                <ul class="rules-list">
+                    <li>No se permite ningún tipo de discriminación por género, edad, orientación sexual, etnia, religión, condición económica o nivel educativo.</li>
+                    <li>Cada miembro tiene derecho a sentirse bienvenido y valorado desde el primer día.</li>
+                    <li>Los miembros con más experiencia tienen la responsabilidad de hacer sentir cómodos a los nuevos.</li>
+                    <li>La diversidad de perspectivas nos hace más fuertes. Abraza las diferencias.</li>
+                </ul>
+            </div>
+
+            <div class="rules-closing">
+                <h2>Esto no es un documento legal. Es una promesa.</h2>
+                <p>Estas reglas son un acuerdo entre personas que quieren lo mismo: ver a Chitagá crecer. Al unirte a esta comunidad, te comprometes a cuidar este espacio tanto como nosotros lo cuidamos. Si en algún momento sientes que algo no está bien, habla. Tu voz es parte de la solución.</p>
+                <a href="/#contacto" class="rules-cta">Quiero ser parte</a>
+            </div>
+
+        </div>
+    </section>
+</Layout>
+
+<style>
+    .rules-hero {
+        padding: 6rem 2rem 3rem;
+        background: #ffffff;
+    }
+
+    :global(.dark) .rules-hero {
+        background: #191919;
+    }
+
+    @media (min-width: 768px) {
+        .rules-hero { padding: 8rem 3rem 4rem; }
+    }
+
+    @media (min-width: 1024px) {
+        .rules-hero { padding: 10rem 4rem 4rem; }
+    }
+
+    .rules-hero-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+    .rules-back {
+        display: inline-block;
+        width: fit-content;
+        font-family: var(--font-pop);
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: var(--color-orange);
+        transition: opacity 0.2s ease;
+        margin-bottom: 0.5rem;
+    }
+
+    .rules-back:hover {
+        opacity: 0.7;
+    }
+
+    .rules-badge {
+        display: inline-block;
+        width: fit-content;
+        padding: 0.35rem 1rem;
+        font-size: 0.7rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.15em;
+        border-radius: 9999px;
+        color: var(--color-green-dark);
+        border: 1px solid var(--color-green-dark);
+        font-family: var(--font-pop);
+    }
+
+    :global(.dark) .rules-badge {
+        color: var(--color-orange);
+        border-color: var(--color-orange);
+    }
+
+    .rules-title {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 2.25rem;
+        line-height: 1.15;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .rules-title {
+        color: var(--color-white);
+    }
+
+    @media (min-width: 768px) {
+        .rules-title { font-size: 2.75rem; }
+    }
+
+    .rules-subtitle {
+        font-family: var(--font-sans);
+        font-size: 1.05rem;
+        line-height: 1.75;
+        color: #6b7280;
+        max-width: 600px;
+    }
+
+    :global(.dark) .rules-subtitle {
+        color: #a1a1aa;
+    }
+
+    /* Content */
+    .rules-content {
+        padding: 2rem 2rem 6rem;
+        background: #fafafa;
+    }
+
+    :global(.dark) .rules-content {
+        background: #111111;
+    }
+
+    @media (min-width: 768px) {
+        .rules-content { padding: 3rem 3rem 8rem; }
+    }
+
+    @media (min-width: 1024px) {
+        .rules-content { padding: 4rem 4rem 10rem; }
+    }
+
+    .rules-inner {
+        max-width: 720px;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .rules-intro {
+        padding: 2rem;
+        border-radius: 1rem;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    :global(.dark) .rules-intro {
+        background: #1a1a1a;
+        border-color: rgba(255, 255, 255, 0.06);
+    }
+
+    .rules-intro p {
+        font-family: var(--font-sans);
+        font-size: 1rem;
+        line-height: 1.8;
+        color: #4b5563;
+    }
+
+    :global(.dark) .rules-intro p {
+        color: #d1d5db;
+    }
+
+    /* Groups */
+    .rules-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .rules-group-header {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    .rules-group-number {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 1.5rem;
+        color: var(--color-orange);
+        opacity: 0.35;
+        flex-shrink: 0;
+    }
+
+    .rules-group h2 {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 1.25rem;
+        color: var(--color-green-dark);
+    }
+
+    :global(.dark) .rules-group h2 {
+        color: var(--color-white);
+    }
+
+    @media (min-width: 768px) {
+        .rules-group h2 { font-size: 1.4rem; }
+    }
+
+    .rules-group-desc {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        color: #6b7280;
+        font-style: italic;
+    }
+
+    :global(.dark) .rules-group-desc {
+        color: #9ca3af;
+    }
+
+    .rules-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+        padding-left: 0;
+        list-style: none;
+    }
+
+    .rules-list li {
+        font-family: var(--font-sans);
+        font-size: 0.925rem;
+        line-height: 1.7;
+        color: #4b5563;
+        padding-left: 1.5rem;
+        position: relative;
+    }
+
+    :global(.dark) .rules-list li {
+        color: #d1d5db;
+    }
+
+    .rules-list li::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.6em;
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--color-orange);
+        opacity: 0.6;
+    }
+
+    /* Closing */
+    .rules-closing {
+        margin-top: 1rem;
+        padding: 2.5rem 2rem;
+        border-radius: 1rem;
+        background: var(--color-green-dark);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+    }
+
+    :global(.dark) .rules-closing {
+        background: #1a1a1a;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .rules-closing h2 {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 1.3rem;
+        color: #ffffff;
+        max-width: 480px;
+    }
+
+    .rules-closing p {
+        font-family: var(--font-sans);
+        font-size: 0.95rem;
+        line-height: 1.75;
+        color: rgba(255, 255, 255, 0.75);
+        max-width: 520px;
+    }
+
+    .rules-cta {
+        display: inline-block;
+        margin-top: 0.5rem;
+        padding: 0.75rem 2rem;
+        background: var(--color-orange);
+        color: #ffffff;
+        font-family: var(--font-pop);
+        font-weight: 600;
+        font-size: 0.9rem;
+        border-radius: 0.5rem;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .rules-cta:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(185, 58, 5, 0.3);
+    }
+</style>
