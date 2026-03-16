@@ -153,10 +153,19 @@ const navLinks = [
                 });
 
                 const header = document.getElementById('site-header');
-                // Apply scrolled state immediately if already scrolled (e.g. after reload)
+                let lastScrollY = window.scrollY;
+                // Apply initial state
                 if (window.scrollY > 50) header?.classList.add('scrolled');
                 window.addEventListener('scroll', () => {
-                    header?.classList.toggle('scrolled', window.scrollY > 50);
+                    const currentY = window.scrollY;
+                    header?.classList.toggle('scrolled', currentY > 50);
+                    // Hide on scroll down, show on scroll up
+                    if (currentY > 100 && currentY > lastScrollY) {
+                        header?.classList.add('header-hidden');
+                    } else {
+                        header?.classList.remove('header-hidden');
+                    }
+                    lastScrollY = currentY;
                 });
 
                 // Active nav link on scroll

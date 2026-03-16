@@ -139,19 +139,29 @@ import ButtonToggle from "../components/buttonToggle.jsx";
     .rules-hero {
         position: relative;
         padding: 8rem 2rem 4rem;
-        background: url('/parque.jpg') center/cover no-repeat;
         overflow: hidden;
+        background: var(--color-green-dark);
+    }
+
+    .rules-hero::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url('/parque.jpg') center/cover no-repeat;
+        filter: blur(1px);
+        transform: scale(1.05);
     }
 
     .rules-hero::before {
         content: '';
         position: absolute;
         inset: 0;
-        background: rgba(0, 0, 0, 0.65);
+        background: rgba(0, 0, 0, 0.62);
+        z-index: 1;
     }
 
     :global(.dark) .rules-hero::before {
-        background: rgba(0, 0, 0, 0.78);
+        background: rgba(0, 0, 0, 0.75);
     }
 
     @media (min-width: 768px) {
@@ -164,7 +174,7 @@ import ButtonToggle from "../components/buttonToggle.jsx";
 
     .rules-hero-inner {
         position: relative;
-        z-index: 1;
+        z-index: 2;
         max-width: 720px;
         margin: 0 auto;
         display: flex;

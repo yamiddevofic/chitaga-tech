@@ -51,21 +51,26 @@ dark {
 /* ==================== Header ==================== */
 #site-header {
     @apply fixed top-0 left-0 w-full z-40;
-    background: transparent;
-    border-bottom: none;
-    transition: background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    transition: transform 0.35s ease, box-shadow 0.3s ease;
+}
+
+:where(.dark, .dark *) #site-header {
+    background: #111111;
+    border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
 #site-header.scrolled {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.06);
 }
 
 :where(.dark, .dark *) #site-header.scrolled {
-    background: rgba(17, 17, 17, 0.85);
-    border-bottom-color: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+}
+
+#site-header.header-hidden {
+    transform: translateY(-100%);
 }
 
 .header-inner {
