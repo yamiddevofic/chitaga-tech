@@ -447,7 +447,8 @@ main {
 
 /* Toggle theme button */
 #toggle-theme {
-    @apply bg-orange text-white text-sm px-3 py-2 rounded-lg fixed bottom-3 right-3 z-50 font-pop
-           sm:px-4 sm:bottom-4 sm:right-4;
+    @apply bg-orange text-white fixed bottom-4 right-4 z-50 rounded-full w-14 h-14
+           sm:bottom-5 sm:right-5;
+    box-shadow: 0 4px 16px rgba(185, 58, 5, 0.3);
 }
 

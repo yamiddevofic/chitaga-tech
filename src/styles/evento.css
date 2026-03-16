@@ -1,0 +1,592 @@
+/* ==================== Hero ==================== */
+.evento-hero {
+    position: relative;
+    padding: 7rem 1.5rem 4.5rem;
+    overflow: hidden;
+    background: var(--color-green-dark);
+    min-height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.evento-hero::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--hero-img) center/cover no-repeat;
+    transform: scale(1.05);
+}
+
+.evento-hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(170deg, rgba(185, 58, 5, 0.92) 0%, rgba(120, 30, 0, 0.85) 100%);
+    z-index: 1;
+}
+
+.dark .evento-hero {
+    background: #111111;
+}
+
+.dark .evento-hero::before {
+    background: linear-gradient(170deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
+}
+
+@media (min-width: 480px) {
+    .evento-hero { padding: 7.5rem 2rem 4.5rem; }
+}
+
+@media (min-width: 768px) {
+    .evento-hero {
+        padding: 8rem 3rem 5rem;
+        min-height: 45vh;
+    }
+}
+
+@media (min-width: 1024px) {
+    .evento-hero { padding: 9rem 4rem 5.5rem; }
+}
+
+.evento-hero-inner {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    text-align: center;
+    align-items: center;
+}
+
+.evento-back {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    width: fit-content;
+    font-family: var(--font-pop);
+    font-size: 0.78rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.65);
+    transition: color 0.2s ease, transform 0.2s ease;
+    margin-bottom: 0.5rem;
+}
+
+.evento-back:hover {
+    color: #ffffff;
+    transform: translateX(-3px);
+}
+
+.evento-badge {
+    display: inline-block;
+    width: fit-content;
+    padding: 0.25rem 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    border-radius: 9999px;
+    color: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    font-family: var(--font-pop);
+}
+
+.evento-title {
+    font-family: var(--font-montserrat);
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 1.15;
+    color: #ffffff;
+    max-width: 520px;
+}
+
+@media (min-width: 480px) {
+    .evento-title { font-size: 2rem; }
+}
+
+@media (min-width: 768px) {
+    .evento-title { font-size: 2.5rem; }
+}
+
+.evento-description {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.75;
+    color: rgba(255, 255, 255, 0.85);
+    max-width: 480px;
+}
+
+@media (min-width: 768px) {
+    .evento-description { font-size: 1.05rem; }
+}
+
+/* ==================== Meta info ==================== */
+.evento-meta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 0.75rem;
+}
+
+@media (min-width: 480px) {
+    .evento-meta {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.25rem;
+    }
+}
+
+.evento-meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.evento-meta-item svg {
+    width: 0.9rem;
+    height: 0.9rem;
+    flex-shrink: 0;
+    opacity: 0.7;
+}
+
+.evento-spots {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    margin-top: 0.5rem;
+    padding: 0.3rem 0.85rem;
+    border-radius: 9999px;
+    font-family: var(--font-pop);
+    font-size: 0.72rem;
+    font-weight: 600;
+    background: rgba(255, 255, 255, 0.08);
+    color: #86efac;
+}
+
+.evento-spots.almost-full {
+    color: #fbbf24;
+}
+
+.evento-spots.full {
+    color: #fca5a5;
+}
+
+/* ==================== Form section ==================== */
+.evento-form-section {
+    padding: 3.5rem 1.5rem 5rem;
+    background: #ffffff;
+}
+
+.dark .evento-form-section {
+    background: #141414;
+}
+
+@media (min-width: 480px) {
+    .evento-form-section { padding: 4rem 2rem 5rem; }
+}
+
+@media (min-width: 768px) {
+    .evento-form-section { padding: 4.5rem 3rem 6rem; }
+}
+
+@media (min-width: 1024px) {
+    .evento-form-section { padding: 5rem 4rem 7rem; }
+}
+
+.evento-form-inner {
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+.evento-form-title {
+    font-family: var(--font-montserrat);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-green-dark);
+    margin-bottom: 0.35rem;
+}
+
+.dark .evento-form-title {
+    color: var(--color-white);
+}
+
+.evento-form-subtitle {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    color: #9ca3af;
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+/* ==================== Form ==================== */
+.evento-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+}
+
+.ef-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.ef-group label {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #374151;
+    letter-spacing: 0.01em;
+}
+
+.dark .ef-group label {
+    color: rgba(255, 255, 255, 0.65);
+}
+
+.ef-group label .ef-optional {
+    font-weight: 400;
+    color: #c0c0c0;
+    font-size: 0.75rem;
+}
+
+.dark .ef-group label .ef-optional {
+    color: #555;
+}
+
+.ef-group input,
+.ef-group select,
+.ef-group textarea {
+    width: 100%;
+    padding: 0.75rem 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 1.5px solid rgba(0, 0, 0, 0.1);
+    background: transparent;
+    color: #1a1a1a;
+    font-family: var(--font-sans);
+    font-size: 0.95rem;
+    transition: border-color 0.3s ease;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.dark .ef-group input,
+.dark .ef-group select,
+.dark .ef-group textarea {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+    color: #f0f0f0;
+}
+
+.ef-group input::placeholder,
+.ef-group textarea::placeholder {
+    color: #c4c4c4;
+    font-size: 0.9rem;
+}
+
+.dark .ef-group input::placeholder,
+.dark .ef-group textarea::placeholder {
+    color: #444;
+}
+
+.ef-group input:focus,
+.ef-group select:focus,
+.ef-group textarea:focus {
+    border-bottom-color: var(--color-orange);
+}
+
+.ef-group textarea {
+    resize: vertical;
+    min-height: 80px;
+    padding: 0.75rem 0;
+}
+
+.ef-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%239ca3af' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0 center;
+    padding-right: 1.5rem;
+    cursor: pointer;
+}
+
+/* Field status */
+.ef-status {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    font-weight: 500;
+    min-height: 1em;
+    margin-top: 4px;
+    transition: color 0.2s ease;
+}
+
+.ef-status.error {
+    color: #ef4444;
+}
+
+.dark .ef-status.error {
+    color: #fca5a5;
+}
+
+.ef-status.ok {
+    color: #22c55e;
+}
+
+.dark .ef-status.ok {
+    color: #86efac;
+}
+
+/* Error input */
+.ef-group input.ef-input-error,
+.ef-group select.ef-input-error,
+.ef-group textarea.ef-input-error {
+    border-bottom-color: #ef4444;
+}
+
+/* Submit */
+.ef-submit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.85rem 2rem;
+    margin-top: 0.75rem;
+    background: var(--color-green-dark);
+    color: #ffffff;
+    font-family: var(--font-pop);
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    border-radius: 0.6rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.dark .ef-submit {
+    background: var(--color-orange);
+}
+
+.ef-submit:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+}
+
+.ef-submit:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.ef-submit .ef-spinner {
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: #fff;
+    border-radius: 50%;
+    animation: ef-spin 0.6s linear infinite;
+}
+
+@keyframes ef-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Feedback */
+.ef-feedback {
+    font-family: var(--font-sans);
+    font-size: 0.82rem;
+    font-weight: 500;
+    min-height: 1.2em;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.ef-feedback:empty {
+    display: none;
+}
+
+.ef-feedback.error {
+    color: #ef4444;
+    padding: 0.6rem 0;
+}
+
+.dark .ef-feedback.error {
+    color: #fca5a5;
+}
+
+/* ==================== Success popup ==================== */
+.evento-popup-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.evento-popup-overlay.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.evento-popup-card {
+    background: #ffffff;
+    border-radius: 1.25rem;
+    padding: 2.5rem 2rem;
+    max-width: 380px;
+    width: 90%;
+    text-align: center;
+    transform: scale(0.95) translateY(10px);
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+}
+
+.dark .evento-popup-card {
+    background: #1a1a1a;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.evento-popup-overlay.is-visible .evento-popup-card {
+    transform: scale(1) translateY(0);
+}
+
+.evento-popup-icon {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 1.25rem;
+    background: var(--color-green-dark);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.dark .evento-popup-icon {
+    background: var(--color-orange);
+}
+
+.evento-popup-icon svg {
+    width: 24px;
+    height: 24px;
+    color: #ffffff;
+}
+
+.evento-popup-title {
+    font-family: var(--font-montserrat);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-green-dark);
+    margin-bottom: 0.5rem;
+}
+
+.dark .evento-popup-title {
+    color: var(--color-white);
+}
+
+.evento-popup-text {
+    font-family: var(--font-sans);
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #6b7280;
+    margin-bottom: 1.5rem;
+}
+
+.dark .evento-popup-text {
+    color: #9ca3af;
+}
+
+.evento-popup-btn {
+    display: inline-block;
+    padding: 0.7rem 2rem;
+    background: var(--color-green-dark);
+    color: #ffffff;
+    font-family: var(--font-pop);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border: none;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    text-decoration: none;
+}
+
+.dark .evento-popup-btn {
+    background: var(--color-orange);
+}
+
+.evento-popup-btn:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+}
+
+/* ==================== Closed state ==================== */
+.evento-closed {
+    text-align: center;
+    padding: 3rem 1.5rem;
+}
+
+.evento-closed-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.evento-closed h2 {
+    font-family: var(--font-montserrat);
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--color-green-dark);
+    margin-bottom: 0.5rem;
+}
+
+.dark .evento-closed h2 {
+    color: var(--color-white);
+}
+
+.evento-closed p {
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    color: #6b7280;
+    max-width: 380px;
+    margin: 0 auto;
+    line-height: 1.7;
+}
+
+.dark .evento-closed p {
+    color: #9ca3af;
+}
+
+.evento-closed-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    padding: 0.7rem 1.75rem;
+    background: var(--color-green-dark);
+    color: #ffffff;
+    font-family: var(--font-pop);
+    font-weight: 600;
+    font-size: 0.85rem;
+    border-radius: 0.5rem;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+    text-decoration: none;
+}
+
+.dark .evento-closed-link {
+    background: var(--color-orange);
+}
+
+.evento-closed-link:hover {
+    transform: translateY(-1px);
+    opacity: 0.92;
+}

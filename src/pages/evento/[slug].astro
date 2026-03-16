@@ -1,0 +1,176 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ButtonToggle from "../../components/buttonToggle.jsx";
+import { events, getEventBySlug } from "../../data/events.js";
+import '../../styles/evento.css';
+
+export function getStaticPaths() {
+    return events.map(event => ({
+        params: { slug: event.slug },
+    }));
+}
+
+const { slug } = Astro.params;
+const event = getEventBySlug(slug);
+
+if (!event) {
+    return Astro.redirect('/404');
+}
+
+const dateFormatted = new Date(event.date + 'T12:00:00').toLocaleDateString('es-CO', {
+    weekday: 'long',
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+});
+
+const isClosed = event.status !== 'open';
+const fieldsJson = JSON.stringify(event.fields);
+---
+
+<Layout
+    title={`${event.title} — Chitagá Tech`}
+    description={event.description}
+    image={event.image || "/og-image.png"}
+    ogType="article"
+>
+    <ButtonToggle client:load />
+
+    <section class="evento-hero" style={event.image ? `--hero-img: url('${event.image}')` : ''}>
+        <div class="evento-hero-inner">
+            <a href="/" class="evento-back">&larr; Volver al inicio</a>
+            <span class="evento-badge">{event.badge}</span>
+            <h1 class="evento-title">{event.title}</h1>
+            <p class="evento-description">{event.description}</p>
+
+            <div class="evento-meta">
+                <span class="evento-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    {dateFormatted}
+                </span>
+                <span class="evento-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+                    {event.time}
+                </span>
+                <span class="evento-meta-item">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                    {event.location}
+                </span>
+            </div>
+
+            <span id="evento-spots" class="evento-spots" data-slug={slug} data-capacity={event.capacity}>
+                Cupos: cargando...
+            </span>
+        </div>
+    </section>
+
+    <section class="evento-form-section">
+        <div class="evento-form-inner">
+            {isClosed ? (
+                <div class="evento-closed">
+                    <div class="evento-closed-icon">🔒</div>
+                    <h2>Inscripciones cerradas</h2>
+                    <p>Las inscripciones para este evento ya no están disponibles. Mantente atento a los próximos eventos de Chitagá Tech.</p>
+                    <a href="/" class="evento-closed-link">Ver otros eventos</a>
+                </div>
+            ) : (
+                <>
+                    <h2 class="evento-form-title">Formulario de inscripción</h2>
+                    <p class="evento-form-subtitle">Completa tus datos para reservar tu cupo.</p>
+
+                    <form id="evento-form" class="evento-form" data-slug={slug} data-fields={fieldsJson}>
+                        {event.fields.map((field) => (
+                            <div class="ef-group">
+                                <label for={`ef-${field.name}`}>
+                                    {field.label}
+                                    {!field.required && <span class="ef-optional">(opcional)</span>}
+                                </label>
+
+                                {field.type === 'textarea' ? (
+                                    <textarea
+                                        id={`ef-${field.name}`}
+                                        name={field.name}
+                                        rows="4"
+                                        placeholder={field.placeholder || ''}
+                                        required={field.required}
+                                    />
+                                ) : field.type === 'select' ? (
+                                    <select
+                                        id={`ef-${field.name}`}
+                                        name={field.name}
+                                        required={field.required}
+                                    >
+                                        {field.options.map((opt) => (
+                                            <option value={opt.value}>{opt.label}</option>
+                                        ))}
+                                    </select>
+                                ) : (
+                                    <input
+                                        type={field.type}
+                                        id={`ef-${field.name}`}
+                                        name={field.name}
+                                        placeholder={field.placeholder || ''}
+                                        required={field.required}
+                                        min={field.type === 'number' ? field.min : undefined}
+                                        max={field.type === 'number' ? field.max : undefined}
+                                    />
+                                )}
+
+                                <span id={`ef-status-${field.name}`} class="ef-status"></span>
+                            </div>
+                        ))}
+
+                        <button type="button" id="ef-submit-btn" class="ef-submit">Inscribirme</button>
+                        <p id="ef-feedback" class="ef-feedback"></p>
+                    </form>
+                </>
+            )}
+        </div>
+    </section>
+
+    <!-- Success popup -->
+    <div id="evento-success-popup" class="evento-popup-overlay">
+        <div class="evento-popup-card">
+            <div class="evento-popup-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 6L9 17l-5-5"/>
+                </svg>
+            </div>
+            <h3 class="evento-popup-title">¡Inscripción exitosa!</h3>
+            <p class="evento-popup-text">Tu cupo está reservado. Te enviaremos el link de acceso y los detalles al correo que registraste.</p>
+            <button type="button" id="evento-popup-close" class="evento-popup-btn">Entendido</button>
+        </div>
+    </div>
+
+    <script is:inline src="/scripts/evento-form.js"></script>
+    <script is:inline>
+    (function () {
+        var el = document.getElementById('evento-spots');
+        if (!el) return;
+        var slug = el.dataset.slug;
+        var capacity = parseInt(el.dataset.capacity, 10);
+        var API = window.location.hostname === 'localhost' ? '' : 'https://server.chitaga.tech';
+
+        fetch(API + '/api/events/' + slug + '/spots')
+            .then(function (r) { return r.json(); })
+            .then(function (d) {
+                var remaining = capacity - (d.count || 0);
+                if (remaining <= 0) {
+                    el.textContent = 'Sin cupos disponibles';
+                    el.className = 'evento-spots full';
+                    var btn = document.getElementById('ef-submit-btn');
+                    if (btn) { btn.disabled = true; btn.textContent = 'Sin cupos'; }
+                } else if (remaining <= 5) {
+                    el.textContent = '¡Últimos ' + remaining + ' cupos!';
+                    el.className = 'evento-spots almost-full';
+                } else {
+                    el.textContent = remaining + ' cupos disponibles';
+                    el.className = 'evento-spots';
+                }
+            })
+            .catch(function () {
+                el.textContent = capacity + ' cupos';
+            });
+    })();
+    </script>
+</Layout>

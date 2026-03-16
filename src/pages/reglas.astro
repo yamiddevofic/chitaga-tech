@@ -1,18 +1,25 @@
 ---
 import Layout from "../layouts/Layout.astro";
 import ButtonToggle from "../components/buttonToggle.jsx";
+import { rules } from "../data/rules.js";
+import '../styles/reglas.css';
 ---
 
 <Layout
     title="Reglas de la Comunidad — Chitagá Tech"
     description="Las reglas que nos permiten crecer juntos en un espacio seguro, respetuoso e inclusivo. Conoce los principios que guían a la comunidad Chitagá Tech."
     image="/og-reglas.png"
+    ogType="article"
 >
     <ButtonToggle client:load/>
 
     <section class="rules-hero">
         <div class="rules-hero-inner">
-            <a href="/" class="rules-back">&larr; Volver al inicio</a>
+            <a href="/" class="rules-back">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rules-back-icon"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                Volver al inicio
+            </a>
+            <span class="rules-badge">Comunidad</span>
             <h1 class="rules-title">Las reglas que nos hacen comunidad</h1>
             <p class="rules-subtitle">
                 No son restricciones. Son el cimiento de un espacio donde cada persona se siente segura para aprender, equivocarse y crecer.
@@ -25,361 +32,51 @@ import ButtonToggle from "../components/buttonToggle.jsx";
 
             <p class="rules-intro">Chitagá Tech existe porque creemos que nuestra gente merece un lugar donde pueda ser ella misma, preguntar sin miedo y construir sin juicio. Estas reglas protegen eso. Al ser parte de esta comunidad, te comprometes a vivirlas.</p>
 
-            <div class="rule">
-                <div class="rule-header">
-                    <span class="rule-num">01</span>
-                    <div>
-                        <h2>Respeto y trato digno</h2>
-                        <p class="rule-sub">La base de todo. Sin respeto no hay comunidad.</p>
-                    </div>
-                </div>
-                <p class="rule-body">Cada interacción dentro de Chitagá Tech debe estar guiada por la educación, la amabilidad y la empatía. No se toleran agresiones, acoso, insultos ni comentarios que busquen herir o menospreciar a otra persona. Entendemos que cada miembro llega con un nivel y un ritmo de aprendizaje diferente, y eso merece respeto. Las críticas constructivas son bienvenidas cuando nacen de la intención genuina de ayudar, pero la burla, el sarcasmo destructivo y cualquier forma de humillación no tienen lugar aquí.</p>
-            </div>
-
-            <div class="rule">
-                <div class="rule-header">
-                    <span class="rule-num">02</span>
-                    <div>
-                        <h2>Seguridad psicológica</h2>
-                        <p class="rule-sub">Aquí equivocarse está bien.</p>
-                    </div>
-                </div>
-                <p class="rule-body">Queremos que este sea un espacio donde preguntar sea natural, no un acto de valentía. No existen las malas preguntas ni las dudas tontas: toda inquietud es válida y merece una respuesta respetuosa. Nadie será juzgado por lo que no sabe, porque todos estamos en camino de aprender algo nuevo. Comparte tus ideas sin miedo, atrévete a proponer, y si alguien se equivoca, no lo señales: muéstrale el camino. Tu voz importa tanto como la de cualquier otro miembro.</p>
-            </div>
-
-            <div class="rule">
-                <div class="rule-header">
-                    <span class="rule-num">03</span>
-                    <div>
-                        <h2>Participación y compromiso</h2>
-                        <p class="rule-sub">La comunidad crece cuando te involucras.</p>
-                    </div>
-                </div>
-                <p class="rule-body">Una comunidad viva necesita miembros activos. Te invitamos a participar en las actividades, conversaciones, talleres y proyectos que se propongan. Si te comprometes con una tarea o con asistir a un evento, honra tu palabra. Mantén tus intervenciones enfocadas al tema que se esté tratando para que todos podamos aprovechar el tiempo juntos. Y si por alguna razón no puedes cumplir con algo que prometiste, comunícalo con tiempo para que el equipo pueda reorganizarse.</p>
-            </div>
-
-            <div class="rule">
-                <div class="rule-header">
-                    <span class="rule-num">04</span>
-                    <div>
-                        <h2>Colaboración y ayuda mutua</h2>
-                        <p class="rule-sub">Nadie camina solo. Nos apoyamos.</p>
-                    </div>
-                </div>
-                <p class="rule-body">En Chitagá Tech nadie debería sentir que está solo frente a un problema. Si ves que alguien tiene dificultades, tiéndele la mano sin esperar que lo pida. Comparte lo que sabes con generosidad y sin esperar nada a cambio, porque el conocimiento crece cuando se da. Aprende a escuchar antes de responder, a entender antes de opinar. Y cuando alguien logre algo, por pequeño que sea, celébralo como si fuera tuyo, porque en esta comunidad cada logro individual nos impulsa a todos.</p>
-            </div>
-
-            <div class="rule">
-                <div class="rule-header">
-                    <span class="rule-num">05</span>
-                    <div>
-                        <h2>Espacios virtuales y presenciales</h2>
-                        <p class="rule-sub">Las mismas reglas, en persona y en pantalla.</p>
-                    </div>
-                </div>
-                <p class="rule-body">Todo lo que aplica en persona aplica también detrás de una pantalla. En videollamadas, levanta la mano antes de intervenir para mantener el orden, y pide permiso antes de compartir tu pantalla. Si enciendes la cámara, procura que tu entorno sea apropiado para el espacio. En los chats y foros escritos, elige bien tus palabras: lo que se escribe permanece, y el tono puede malinterpretarse fácilmente. Escribe con la misma consideración con la que hablarías cara a cara.</p>
-            </div>
-
-            <div class="rule">
-                <div class="rule-header">
-                    <span class="rule-num">06</span>
-                    <div>
-                        <h2>Resolución de conflictos</h2>
-                        <p class="rule-sub">Los desacuerdos son normales. Importa cómo los resolvemos.</p>
-                    </div>
-                </div>
-                <p class="rule-body">Donde hay personas habrá diferencias, y eso está bien. Lo que importa es cómo las gestionamos. Si tienes una inconformidad, comunícala de forma asertiva, sin rodeos pero con respeto. Intenta resolver el conflicto primero en privado con la otra persona antes de llevarlo a un espacio público. Si después de intentarlo no logran llegar a un acuerdo, reporta la situación a un administrador para que pueda mediar. Proteger el ambiente de esta comunidad es responsabilidad de todos, no solo de quienes la lideran.</p>
-            </div>
-
-            <div class="rule">
-                <div class="rule-header">
-                    <span class="rule-num">07</span>
-                    <div>
-                        <h2>Inclusión y pertenencia</h2>
-                        <p class="rule-sub">Chitagá Tech es de todos los que creen en Chitagá.</p>
-                    </div>
-                </div>
-                <p class="rule-body">En esta comunidad no hay espacio para la discriminación de ningún tipo: ni por género, ni por edad, ni por orientación sexual, ni por etnia, religión, condición económica o nivel educativo. Cada persona que llega tiene derecho a sentirse bienvenida desde el primer momento. Los miembros con más experiencia tienen la responsabilidad de ayudar a los nuevos a sentirse cómodos y parte del grupo. Creemos firmemente que la diversidad de perspectivas nos hace más fuertes, más creativos y mejores como comunidad.</p>
+            <div class="rules-list">
+                {rules.map((rule) => (
+                    <article class="rule">
+                        <div class="rule-header">
+                            <span class="rule-num">{rule.num}</span>
+                            <div>
+                                <h2>{rule.title}</h2>
+                                <p class="rule-sub">{rule.subtitle}</p>
+                            </div>
+                        </div>
+                        <p class="rule-body">{rule.body}</p>
+                    </article>
+                ))}
             </div>
 
             <div class="rules-closing">
                 <p class="closing-label">Esto no es un documento legal.</p>
                 <h2>Es una promesa.</h2>
                 <p>Un acuerdo entre personas que quieren lo mismo: ver a Chitagá crecer. Si algo no está bien, habla. Tu voz es parte de la solución.</p>
-                <a href="/#contacto" class="rules-cta">Quiero ser parte</a>
+            </div>
+
+            <div class="sf-section">
+                <h3 class="sf-title">¿Tienes una sugerencia?</h3>
+                <p class="sf-description">Si crees que algo puede mejorar en nuestras reglas, cuéntanos. Tu opinión importa.</p>
+
+                <form id="suggestion-form" data-topic="reglas">
+                    <div class="sf-group">
+                        <label for="sf-name">Nombre <span class="sf-optional">(opcional)</span></label>
+                        <input type="text" id="sf-name" name="name" placeholder="Tu nombre" autocomplete="name" />
+                        <span id="sf-status-name" class="sf-status"></span>
+                    </div>
+
+                    <div class="sf-group">
+                        <label for="sf-message">Sugerencia <span class="sf-required">*</span></label>
+                        <textarea id="sf-message" name="message" rows="4" placeholder="Escribe tu sugerencia aquí..."></textarea>
+                        <span id="sf-status-message" class="sf-status"></span>
+                    </div>
+
+                    <button type="button" id="sf-submit-btn" class="sf-submit">Enviar sugerencia</button>
+                    <div id="sf-feedback" class="sf-feedback"></div>
+                </form>
             </div>
 
         </div>
     </section>
+
+    <script is:inline src="/scripts/suggestion-form.js"></script>
 </Layout>
-
-<style>
-    /* ==================== Hero ==================== */
-    .rules-hero {
-        position: relative;
-        padding: 8rem 2rem 4rem;
-        overflow: hidden;
-        background: var(--color-orange);
-    }
-
-    .rules-hero::after {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: url('/comunidad.jpg') center/cover no-repeat;
-        transform: scale(1.02);
-    }
-
-    .rules-hero::before {
-        content: '';
-        position: absolute;
-        inset: 0;
-        background: linear-gradient(160deg, rgba(185, 58, 5, 0.88) 0%, rgba(0, 0, 0, 0.65) 100%);
-        z-index: 1;
-    }
-
-    :global(.dark) .rules-hero::before {
-        background: linear-gradient(160deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.72) 100%);
-    }
-
-    @media (min-width: 768px) {
-        .rules-hero { padding: 10rem 3rem 5rem; }
-    }
-
-    @media (min-width: 1024px) {
-        .rules-hero { padding: 12rem 4rem 6rem; }
-    }
-
-    .rules-hero-inner {
-        position: relative;
-        z-index: 2;
-        max-width: 640px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 1.25rem;
-        text-align: center;
-        align-items: center;
-    }
-
-    .rules-back {
-        display: inline-block;
-        width: fit-content;
-        font-family: var(--font-pop);
-        font-size: 0.8rem;
-        font-weight: 500;
-        color: rgba(255, 255, 255, 0.6);
-        transition: color 0.2s ease;
-        margin-bottom: 0.5rem;
-    }
-
-    .rules-back:hover {
-        color: #ffffff;
-    }
-
-    .rules-title {
-        font-family: var(--font-montserrat);
-        font-weight: 700;
-        font-size: 2.25rem;
-        line-height: 1.12;
-        color: #ffffff;
-    }
-
-    @media (min-width: 768px) {
-        .rules-title { font-size: 3rem; }
-    }
-
-    .rules-subtitle {
-        font-family: var(--font-sans);
-        font-size: 1.05rem;
-        line-height: 1.75;
-        color: rgba(255, 255, 255, 0.75);
-        max-width: 520px;
-    }
-
-    /* ==================== Content ==================== */
-    .rules-content {
-        padding: 3.5rem 2rem 6rem;
-        background: #ffffff;
-    }
-
-    :global(.dark) .rules-content {
-        background: #191919;
-    }
-
-    @media (min-width: 768px) {
-        .rules-content { padding: 4.5rem 3rem 8rem; }
-    }
-
-    @media (min-width: 1024px) {
-        .rules-content { padding: 5rem 4rem 10rem; }
-    }
-
-    .rules-inner {
-        max-width: 720px;
-        margin: 0 auto;
-        display: flex;
-        flex-direction: column;
-        gap: 0;
-    }
-
-    .rules-intro {
-        font-family: var(--font-sans);
-        font-size: 1.05rem;
-        line-height: 1.85;
-        color: #6b7280;
-        padding-bottom: 2.5rem;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-        margin-bottom: 2.5rem;
-    }
-
-    :global(.dark) .rules-intro {
-        color: #a1a1aa;
-        border-bottom-color: rgba(255, 255, 255, 0.08);
-    }
-
-    /* ==================== Rule ==================== */
-    .rule {
-        padding: 3rem 0;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    :global(.dark) .rule {
-        border-bottom-color: rgba(255, 255, 255, 0.06);
-    }
-
-    .rule:last-of-type {
-        border-bottom: none;
-        padding-bottom: 1rem;
-    }
-
-    .rule-header {
-        display: flex;
-        align-items: flex-start;
-        gap: 1.25rem;
-        margin-bottom: 1.5rem;
-    }
-
-    .rule-num {
-        font-family: var(--font-montserrat);
-        font-weight: 700;
-        font-size: 2rem;
-        line-height: 1;
-        color: var(--color-orange);
-        opacity: 0.3;
-        flex-shrink: 0;
-        padding-top: 0.1rem;
-    }
-
-    .rule h2 {
-        font-family: var(--font-montserrat);
-        font-weight: 700;
-        font-size: 1.2rem;
-        line-height: 1.3;
-        color: var(--color-green-dark);
-        margin-bottom: 0.25rem;
-    }
-
-    :global(.dark) .rule h2 {
-        color: var(--color-white);
-    }
-
-    @media (min-width: 768px) {
-        .rule h2 { font-size: 1.35rem; }
-    }
-
-    .rule-sub {
-        font-family: var(--font-sans);
-        font-size: 0.875rem;
-        color: #9ca3af;
-    }
-
-    :global(.dark) .rule-sub {
-        color: #6b7280;
-    }
-
-    .rule-body {
-        font-family: var(--font-sans);
-        font-size: 0.95rem;
-        line-height: 1.85;
-        color: #4b5563;
-        margin-left: 3.25rem;
-    }
-
-    @media (max-width: 639px) {
-        .rule-body { margin-left: 0; }
-    }
-
-    :global(.dark) .rule-body {
-        color: #d1d5db;
-    }
-
-    /* ==================== Closing ==================== */
-    .rules-closing {
-        margin-top: 2rem;
-        padding: 3.5rem 2rem;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 0.75rem;
-        border-top: 1px solid rgba(0, 0, 0, 0.06);
-    }
-
-    :global(.dark) .rules-closing {
-        border-top-color: rgba(255, 255, 255, 0.06);
-    }
-
-    .closing-label {
-        font-family: var(--font-sans);
-        font-size: 0.85rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #9ca3af;
-    }
-
-    :global(.dark) .closing-label {
-        color: #6b7280;
-    }
-
-    .rules-closing h2 {
-        font-family: var(--font-montserrat);
-        font-weight: 700;
-        font-size: 1.75rem;
-        color: var(--color-green-dark);
-    }
-
-    :global(.dark) .rules-closing h2 {
-        color: var(--color-white);
-    }
-
-    .rules-closing p:not(.closing-label) {
-        font-family: var(--font-sans);
-        font-size: 0.95rem;
-        line-height: 1.75;
-        color: #6b7280;
-        max-width: 440px;
-    }
-
-    :global(.dark) .rules-closing p:not(.closing-label) {
-        color: #a1a1aa;
-    }
-
-    .rules-cta {
-        display: inline-block;
-        margin-top: 0.75rem;
-        padding: 0.75rem 2rem;
-        background: var(--color-orange);
-        color: #ffffff;
-        font-family: var(--font-pop);
-        font-weight: 600;
-        font-size: 0.9rem;
-        border-radius: 0.5rem;
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
-    }
-
-    .rules-cta:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(185, 58, 5, 0.3);
-    }
-</style>
