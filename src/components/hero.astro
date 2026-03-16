@@ -12,8 +12,8 @@ interface Props {
 }
 
 const {
-    title = "Tu futuro no debería depender de irte de Chitagá",
-    subtitle = "Somos profesionales chitagüenses construyendo el primer espacio de tecnología hecho por y para nuestra gente. Para que irse sea opción, no obligación",
+    title = "Imagina un Chitagá donde quedarte sea tu mejor decisión",
+    subtitle = "Somos chitagüenses que un día tuvieron que irse para crecer. Ahora volvemos con lo aprendido para que los que vienen no tengan que elegir entre su tierra y su futuro.",
     cta = "Quiero ser parte",
     ctaHref = "#contacto",
     imgSrc = "/parque.jpg",
@@ -25,12 +25,12 @@ const {
 <section id="inicio" class="hero-section">
     <div class="hero-inner">
         <ScrollAnimation className="hero-content" delay={0.2} client:load as="div">
-            <span class="hero-badge">De Chitagüenses, para Chitagüenses</span>
+            <span class="hero-badge">Comunidad Tech de Chitagá</span>
             <h1 class="hero-title">{title}</h1>
             <p class="hero-subtitle">{subtitle}</p>
             <div class="hero-actions">
                 <a href={ctaHref} class="hero-cta">{cta}</a>
-                <a href="#nosotros" class="hero-cta-secondary">Conoce por qué lo hacemos &rarr;</a>
+                <a href="#nosotros" class="hero-cta-secondary">Conoce nuestra historia &rarr;</a>
             </div>
         </ScrollAnimation>
 
