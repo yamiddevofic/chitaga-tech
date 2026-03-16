@@ -2,8 +2,8 @@ export const siteConfig = {
     name: "Chitagá Tech",
     alternateName: "Chitaga Tech",
     url: "https://chitaga.tech",
-    slogan: "Nos fuimos para aprender, volvemos para construir",
-    description: "Comunidad de chitagüenses que volvieron con lo aprendido para construir oportunidades reales en tecnología. Cursos, talleres, mentoría y proyectos desde Chitagá, para Chitagá.",
+    slogan: "Que irse sea opción, no obligación",
+    description: "Comunidad de tecnología creada por profesionales chitagüenses para formar talento digital y crear oportunidades laborales en Chitagá, Norte de Santander, Colombia.",
     location: {
         locality: "Chitagá",
         region: "Norte de Santander",
