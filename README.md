@@ -1,46 +1,57 @@
-# Astro Starter Kit: Basics
+# Chitaga Tech
 
-```sh
-npm create astro@latest -- --template basics
+Nos fuimos para aprender, volvemos para construir. Comunidad tech en Chitaga, Norte de Santander, Colombia.
+
+## Tech Stack
+
+- [Astro](https://astro.build) — Framework web
+- [React](https://react.dev) + [Framer Motion](https://www.framer.com/motion/) — Componentes interactivos
+- [Tailwind CSS v4](https://tailwindcss.com) — Estilos
+- [Express](https://expressjs.com) + [better-sqlite3](https://github.com/WiseLibs/better-sqlite3) — API backend
+- [Nodemailer](https://nodemailer.com) — Envio de correos
+
+## Requisitos
+
+- Node.js >= 20
+
+## Instalacion
+
+```bash
+git clone https://github.com/yamiddevofic/chitaga-tech.git
+cd chitaga-tech
+npm install
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Desarrollo
 
-## 🚀 Project Structure
+```bash
+# Frontend (puerto 4323)
+npm run dev
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src
-│   ├── assets
-│   │   └── astro.svg
-│   ├── components
-│   │   └── Welcome.astro
-│   ├── layouts
-│   │   └── Layout.astro
-│   └── pages
-│       └── index.astro
-└── package.json
+# Backend API (puerto 4324)
+npm run server
 ```
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
+## Produccion
 
-## 🧞 Commands
+```bash
+npm run build
+```
 
-All commands are run from the root of the project, from a terminal:
+El build genera archivos estaticos en `dist/`, servidos con Nginx y expuestos via Cloudflare Tunnel.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+## Estructura
 
-## 👀 Want to learn more?
+```
+src/
+├── components/    # Componentes Astro y React
+├── layouts/       # Layout principal con SEO
+├── pages/         # Paginas (index, reglas)
+server/
+├── index.js       # API Express + SQLite
+public/            # Assets estaticos, OG images
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Licencia
+
+MIT
