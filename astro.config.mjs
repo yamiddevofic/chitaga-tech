@@ -1,4 +1,3 @@
-// @ts-check
 import { defineConfig } from 'astro/config';
 import tailwindcss from "@tailwindcss/vite";
 import react from "@astrojs/react";
@@ -16,6 +15,9 @@ export default defineConfig({
             hmr: {
                 clientPort: 443,
                 protocol: 'wss',
+            },
+            proxy: {
+                '/api': 'http://localhost:4324',
             },
         },
     },

@@ -57,13 +57,15 @@ dark {
 }
 
 #site-header.scrolled {
-    background: #ffffff;
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(0, 0, 0, 0.06);
 }
 
 :where(.dark, .dark *) #site-header.scrolled {
-    background: #191919;
-    border-bottom-color: rgba(255, 255, 255, 0.08);
+    background: rgba(17, 17, 17, 0.85);
+    border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
 .header-inner {
@@ -107,13 +109,6 @@ dark {
     filter: brightness(0) invert(1);
 }
 
-.header-text {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    line-height: 1;
-}
-
 .header-name {
     font-family: var(--font-montserrat);
     font-weight: 700;
@@ -125,21 +120,6 @@ dark {
 
 :where(.dark, .dark *) .header-name {
     color: var(--color-white);
-}
-
-.header-slogan {
-    font-family: var(--font-pop);
-    font-size: 0.6rem;
-    font-weight: 500;
-    letter-spacing: 0.03em;
-    color: #333;
-    white-space: nowrap;
-    transition: color 0.3s ease;
-    margin-top: 3px;
-}
-
-:where(.dark, .dark *) .header-slogan {
-    color: #f2f2f2;
 }
 
 /* Nav desktop */

@@ -4,121 +4,82 @@ import ScrollAnimation from './ScrollAnimation.jsx';
 
 <section id="nosotros" class="about-section">
     <div class="about-inner">
-        <ScrollAnimation className="about-text" delay={0.2} client:load as="div">
-            <span class="about-badge">El porqué</span>
+        <ScrollAnimation className="about-header" delay={0.2} client:load as="div">
+            <span class="about-badge">Nosotros</span>
             <h2 class="about-title">Porque irse no debería ser la única opción</h2>
             <p class="about-description">
-                En Chitagá no existe un lugar donde aprender las habilidades que este siglo exige. Muchos jóvenes se van porque aquí no encuentran salidas. Otros se quedan sin herramientas para competir. <strong>Chitagá Tech</strong> nace para cambiar eso: un espacio físico y digital, creado por profesionales del municipio, donde cualquier persona pueda formarse en tecnología sin tener que abandonar su tierra.
+                En Chitagá no existe un lugar donde aprender las habilidades que este siglo exige. Muchos jóvenes se van porque aquí no encuentran salidas. <strong>Chitagá Tech</strong> nace para cambiar eso: un espacio creado por profesionales del municipio, donde cualquier persona pueda formarse en tecnología sin abandonar su tierra.
             </p>
-            <div class="about-mission">
-                <ScrollAnimation delay={0.4} variants={{
-                    hidden: { opacity: 0, x: -30 },
-                    visible: { opacity: 1, x: 0 }
-                }} client:load as="div">
-                    <div class="about-card">
-                        <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 16v-4M12 8h.01"/>
-                        </svg>
-                        <div>
-                            <h3>Lo que queremos lograr</h3>
-                            <p>Sembrar talento tecnológico en Chitagá. Que nuestros jóvenes tengan acceso real a formación de calidad, y que si algún día se van, sea por elección y no porque les tocó.</p>
-                        </div>
-                    </div>
-                </ScrollAnimation>
-                <ScrollAnimation delay={0.6} variants={{
-                    hidden: { opacity: 0, x: -30 },
-                    visible: { opacity: 1, x: 0 }
-                }} client:load as="div">
-                    <div class="about-card">
-                        <svg class="about-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                            <circle cx="12" cy="12" r="3"/>
-                        </svg>
-                        <div>
-                            <h3>A dónde apuntamos</h3>
-                            <p>Que desde Chitagá se pueda crear, innovar y transformar. Que el talento de aquí impacte no solo al municipio, sino a Colombia y al mundo.</p>
-                        </div>
-                    </div>
-                </ScrollAnimation>
-            </div>
         </ScrollAnimation>
-        <ScrollAnimation delay={0.3} variants={{
-            hidden: { opacity: 0, rotate: -10 },
-            visible: { opacity: 1, rotate: 0 }
-        }} client:load as="div">
-            <div class="about-visual">
-                <div class="about-graphic">
-                    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <circle cx="100" cy="100" r="80" stroke="currentColor" stroke-width="1.5" opacity="0.2"/>
-                        <circle cx="100" cy="100" r="55" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
-                        <circle cx="100" cy="100" r="30" fill="currentColor" opacity="0.1"/>
-                        <circle cx="100" cy="50" r="8" fill="var(--color-orange)"/>
-                        <circle cx="145" cy="120" r="8" fill="var(--color-green-light)"/>
-                        <circle cx="55" cy="120" r="8" fill="var(--color-orange)"/>
-                        <line x1="100" y1="58" x2="140" y2="114" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                        <line x1="100" y1="58" x2="60" y2="114" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                        <line x1="62" y1="120" x2="138" y2="120" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                        <text x="100" y="105" text-anchor="middle" font-family="var(--font-montserrat)" font-size="14" font-weight="700" fill="currentColor" opacity="0.6">CT</text>
-                    </svg>
+
+        <div class="about-cards">
+            <ScrollAnimation delay={0.4} variants={{
+                hidden: { opacity: 0, y: 24 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="about-card">
+                    <div class="about-card-number">01</div>
+                    <h3>Lo que queremos lograr</h3>
+                    <p>Sembrar talento tecnológico en Chitagá. Que nuestros jóvenes tengan acceso real a formación de calidad, y que si algún día se van, sea por elección y no porque les tocó.</p>
                 </div>
-            </div>
-        </ScrollAnimation>
+            </ScrollAnimation>
+            <ScrollAnimation delay={0.6} variants={{
+                hidden: { opacity: 0, y: 24 },
+                visible: { opacity: 1, y: 0 }
+            }} client:load as="div">
+                <div class="about-card">
+                    <div class="about-card-number">02</div>
+                    <h3>A dónde apuntamos</h3>
+                    <p>Que desde Chitagá se pueda crear, innovar y transformar. Que el talento de aquí impacte no solo al municipio, sino a Colombia y al mundo.</p>
+                </div>
+            </ScrollAnimation>
+        </div>
     </div>
 </section>
 
 <style>
     .about-section {
-        padding: 5rem 2rem;
-        background: #ffffff;
+        padding: 6rem 2rem;
+        background: #fafafa;
     }
 
     :global(.dark) .about-section {
-        background: #191919;
+        background: #111111;
     }
 
     @media (min-width: 768px) {
         .about-section {
-            padding: 6rem 3rem;
+            padding: 8rem 3rem;
         }
     }
 
     @media (min-width: 1024px) {
         .about-section {
-            padding: 8rem 4rem;
+            padding: 10rem 4rem;
         }
     }
 
     .about-inner {
-        max-width: 1200px;
+        max-width: 960px;
         margin: 0 auto;
-        display: grid;
-        gap: 2rem;
     }
 
-    @media (min-width: 768px) {
-        .about-inner {
-            grid-template-columns: 1fr auto;
-            align-items: center;
-            gap: 5rem;
-        }
-    }
-
-    /* :global() needed because this class is on a React-rendered element */
-    :global(.about-text) {
+    :global(.about-header) {
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 1.25rem;
+        text-align: center;
+        align-items: center;
+        margin-bottom: 4rem;
     }
 
     .about-badge {
         display: inline-block;
-        width: fit-content;
-        padding: 0.3rem 0.85rem;
+        padding: 0.35rem 1rem;
         font-size: 0.7rem;
         font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
+        letter-spacing: 0.15em;
         border-radius: 9999px;
         color: var(--color-green-dark);
         border: 1px solid var(--color-green-dark);
@@ -133,9 +94,10 @@ import ScrollAnimation from './ScrollAnimation.jsx';
     .about-title {
         font-family: var(--font-montserrat);
         font-weight: 700;
-        font-size: 1.75rem;
-        line-height: 1.2;
+        font-size: 2rem;
+        line-height: 1.15;
         color: var(--color-green-dark);
+        max-width: 600px;
     }
 
     :global(.dark) .about-title {
@@ -144,20 +106,20 @@ import ScrollAnimation from './ScrollAnimation.jsx';
 
     @media (min-width: 768px) {
         .about-title {
-            font-size: 2.25rem;
+            font-size: 2.5rem;
         }
     }
 
     .about-description {
         font-family: var(--font-sans);
         font-size: 1rem;
-        line-height: 1.7;
-        color: #4b5563;
-        max-width: 540px;
+        line-height: 1.8;
+        color: #6b7280;
+        max-width: 580px;
     }
 
     :global(.dark) .about-description {
-        color: #d1d5db;
+        color: #a1a1aa;
     }
 
     .about-description strong {
@@ -169,51 +131,56 @@ import ScrollAnimation from './ScrollAnimation.jsx';
         color: var(--color-orange);
     }
 
-    .about-mission {
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
-        margin-top: 0.5rem;
+    .about-cards {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    @media (min-width: 640px) {
+        .about-cards {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
     }
 
     .about-card {
-        display: flex;
-        gap: 1.25rem;
-        padding: 1.5rem;
-        border-radius: 0.75rem;
-        border: 1px solid rgba(0, 0, 0, 0.08);
-        background: rgba(0, 0, 0, 0.02);
-        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        padding: 2rem;
+        border-radius: 1rem;
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.06);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
     :global(.dark) .about-card {
-        border-color: rgba(255, 255, 255, 0.08);
-        background: rgba(255, 255, 255, 0.03);
+        background: #1a1a1a;
+        border-color: rgba(255, 255, 255, 0.06);
     }
 
     .about-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.08);
     }
 
     :global(.dark) .about-card:hover {
-        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
     }
 
-    .about-icon {
-        width: 2rem;
-        height: 2rem;
-        flex-shrink: 0;
+    .about-card-number {
+        font-family: var(--font-montserrat);
+        font-weight: 700;
+        font-size: 2.5rem;
+        line-height: 1;
         color: var(--color-orange);
-        margin-top: 0.15rem;
+        opacity: 0.25;
+        margin-bottom: 1.25rem;
     }
 
     .about-card h3 {
         font-family: var(--font-montserrat);
         font-weight: 600;
-        font-size: 0.95rem;
+        font-size: 1.1rem;
         color: var(--color-green-dark);
-        margin-bottom: 0.35rem;
+        margin-bottom: 0.75rem;
     }
 
     :global(.dark) .about-card h3 {
@@ -222,54 +189,12 @@ import ScrollAnimation from './ScrollAnimation.jsx';
 
     .about-card p {
         font-family: var(--font-sans);
-        font-size: 0.875rem;
-        line-height: 1.6;
+        font-size: 0.9rem;
+        line-height: 1.7;
         color: #6b7280;
     }
 
     :global(.dark) .about-card p {
         color: #9ca3af;
-    }
-
-    /* Visual / Graphic */
-    .about-visual {
-        flex-shrink: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    @media (min-width: 768px) {
-        .about-visual {
-            width: 280px;
-        }
-    }
-
-    @media (min-width: 1024px) {
-        .about-visual {
-            width: 340px;
-        }
-    }
-
-    .about-graphic {
-        width: 200px;
-        height: 200px;
-        color: var(--color-green-dark);
-    }
-
-    :global(.dark) .about-graphic {
-        color: var(--color-white);
-    }
-
-    @media (min-width: 768px) {
-        .about-graphic {
-            width: 260px;
-            height: 260px;
-        }
-    }
-
-    .about-graphic svg {
-        width: 100%;
-        height: 100%;
     }
 </style>

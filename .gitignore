@@ -1,6 +1,11 @@
 # build output
 dist/
 
+# database
+*.db
+*.db-shm
+*.db-wal
+
 # generated types
 .astro/
 
