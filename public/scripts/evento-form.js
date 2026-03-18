@@ -29,7 +29,14 @@
         if (input) { input.classList.remove('ef-input-error'); }
     }
 
-    // Real-time validation
+    // Check if server is available
+    function checkServerAvailability() {
+        return fetch(API + '/api/health', { method: 'HEAD' })
+            .then(function() { return true; })
+            .catch(function() { return false; });
+    }
+
+    // Real-time validation (sin conexión a servidor para email)
     form.addEventListener('input', function (e) {
         var target = e.target;
         if (!target || !target.name) return;
@@ -57,24 +64,13 @@
             if (field.max !== undefined && num > field.max) { setStatus(field.name, 'Máximo: ' + field.max, 'error'); return; }
         }
 
-        // Email format + duplicate check
+        // Email format (sin verificar duplicados)
         if (field.type === 'email') {
             if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)) {
                 setStatus(field.name, 'Correo no válido', 'error');
                 return;
             }
-            clearTimeout(debounceTimers.email);
-            debounceTimers.email = setTimeout(function () {
-                fetch(API + '/api/events/' + slug + '/check-email?email=' + encodeURIComponent(val))
-                    .then(function (r) { return r.json(); })
-                    .then(function (d) {
-                        emailExists = d.exists;
-                        setStatus(field.name,
-                            d.exists ? 'Ya estás inscrito con este correo' : 'Correo disponible',
-                            d.exists ? 'error' : 'ok');
-                    })
-                    .catch(function () { emailExists = false; });
-            }, 500);
+            setStatus(field.name, 'Correo válido', 'ok');
             return;
         }
 
@@ -136,46 +132,61 @@
             }
         }
 
-        if (emailExists) {
-            if (feedback) { feedback.textContent = 'Ya estás inscrito con ese correo'; feedback.className = 'ef-feedback error'; }
-            return;
-        }
-
         if (hasError) {
             if (feedback) { feedback.textContent = 'Corrige los campos marcados'; feedback.className = 'ef-feedback error'; }
             return;
         }
 
-        // Send
-        btn.disabled = true;
-        btn.innerHTML = '<span class="ef-spinner"></span> Enviando...';
-        if (feedback) { feedback.textContent = ''; feedback.className = 'ef-feedback'; }
-
-        fetch(API + '/api/events/' + slug + '/register', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data),
-        })
-        .then(function (res) { return res.json().then(function (r) { return { ok: res.ok, status: res.status, result: r }; }); })
-        .then(function (resp) {
-            if (resp.ok) {
-                var popup = $('evento-success-popup');
-                if (popup) popup.classList.add('is-visible');
-                form.reset();
-                // Clear all statuses
-                fields.forEach(function (f) { clearStatus(f.name); });
-            } else {
-                var msg = resp.result.error || 'Error al enviar';
-                if (resp.status === 429) msg = 'Demasiados intentos. Espera un momento.';
-                if (feedback) { feedback.textContent = msg; feedback.className = 'ef-feedback error'; }
+        // Check server availability first
+        checkServerAvailability().then(function(isAvailable) {
+            if (!isAvailable) {
+                // Server not available - show alternative options
+                if (feedback) {
+                    feedback.innerHTML = 'El servidor no está disponible temporalmente. Por favor, contáctanos directamente:<br><br>' +
+                        '📧 Email: <a href="mailto:info@chitaga.tech" style="color: var(--color-orange);">info@chitaga.tech</a><br>' +
+                        '📱 WhatsApp: <a href="https://wa.me/573123456789" style="color: var(--color-orange);" target="_blank">+57 312 345 6789</a><br><br>' +
+                        'O intenta más tarde.';
+                    feedback.className = 'ef-feedback error';
+                }
+                return;
             }
-            btn.disabled = false;
-            btn.textContent = 'Inscribirme';
-        })
-        .catch(function () {
-            if (feedback) { feedback.textContent = 'No se pudo conectar con el servidor'; feedback.className = 'ef-feedback error'; }
-            btn.disabled = false;
-            btn.textContent = 'Inscribirme';
+
+            // Server available - proceed with normal submission
+            btn.disabled = true;
+            btn.innerHTML = '<span class="ef-spinner"></span> Enviando...';
+            if (feedback) { feedback.textContent = ''; feedback.className = 'ef-feedback'; }
+
+            fetch(API + '/api/events/' + slug + '/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(data),
+            })
+            .then(function (res) { return res.json().then(function (r) { return { ok: res.ok, status: res.status, result: r }; }); })
+            .then(function (resp) {
+                if (resp.ok) {
+                    var popup = $('evento-success-popup');
+                    if (popup) popup.classList.add('is-visible');
+                    form.reset();
+                    // Clear all statuses
+                    fields.forEach(function (f) { clearStatus(f.name); });
+                } else {
+                    var msg = resp.result.error || 'Error al enviar';
+                    if (resp.status === 429) msg = 'Demasiados intentos. Espera un momento.';
+                    if (feedback) { feedback.textContent = msg; feedback.className = 'ef-feedback error'; }
+                }
+                btn.disabled = false;
+                btn.textContent = 'Inscribirme';
+            })
+            .catch(function () {
+                if (feedback) { 
+                    feedback.innerHTML = 'Error de conexión. Por favor, contáctanos directamente:<br><br>' +
+                        '📧 Email: <a href="mailto:info@chitaga.tech" style="color: var(--color-orange);">info@chitaga.tech</a><br>' +
+                        '📱 WhatsApp: <a href="https://wa.me/573123456789" style="color: var(--color-orange);" target="_blank">+57 312 345 6789</a>';
+                    feedback.className = 'ef-feedback error'; 
+                }
+                btn.disabled = false;
+                btn.textContent = 'Inscribirme';
+            });
         });
     });
 

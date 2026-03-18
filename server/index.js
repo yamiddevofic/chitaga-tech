@@ -11,6 +11,7 @@ import {
 import { buildContactEmailHtml } from './templates/contact-email.js';
 import { buildRegistrationEmailHtml } from './templates/registration-email.js';
 import { buildSuggestionEmailHtml } from './templates/suggestion-email.js';
+import { buildInvitationEmail } from './templates/invitation-email.js';
 
 const PORT = process.env.PORT || 4324;
 
@@ -117,6 +118,11 @@ app.use((req, res, next) => {
     next();
 });
 app.use(express.json({ limit: '16kb' }));
+
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+    res.status(200).json({ status: 'ok', timestamp: new Date().toISOString() });
+});
 
 // ==================== Contact routes ====================
 
@@ -292,6 +298,30 @@ app.post('/api/events/:slug/register', rateLimit, (req, res) => {
             data: sanitized,
         });
 
+        // Send calendar invitation to the registrant
+        const group = sanitized.group;
+        const calLink = calendarLinks[group];
+        if (calLink) {
+            const { html, text } = buildInvitationEmail({
+                name: sanitized.name || 'Participante',
+                eventTitle: event.title,
+                groupLabel: groupLabels[group] || group,
+                calendarLink: calLink,
+            });
+            transporter.sendMail({
+                from: `"Chitaga Tech" <${process.env.GMAIL_USER}>`,
+                replyTo: process.env.GMAIL_USER,
+                to: email,
+                subject: 'Confirmacion de inscripcion',
+                html,
+                text,
+            }).then(() => {
+                console.log(`Invitation sent to: ${email} (${group})`);
+            }).catch(err => {
+                console.error(`Failed to send invitation to ${email}:`, err.message);
+            });
+        }
+
         res.json({ success: true, id: result.lastInsertRowid });
     } catch (err) {
         if (err.message?.includes('UNIQUE constraint')) {
@@ -318,6 +348,80 @@ app.get('/api/events/:slug/registrations', (req, res) => {
     } catch (err) {
         console.error('Error fetching registrations:', err);
         res.status(500).json({ error: 'Error al obtener las inscripciones' });
+    }
+});
+
+// ==================== Send invitations ====================
+
+const calendarLinks = {
+    'grupo-1': 'https://calendar.app.google/TrJGdLc4MnQGj1987',
+    'grupo-2': 'https://calendar.app.google/G84dB8jXFfKkUV2a6',
+};
+
+const groupLabels = {
+    'grupo-1': 'Grupo 1 — 2:00 PM a 3:00 PM',
+    'grupo-2': 'Grupo 2 — 9:00 PM a 10:00 PM',
+};
+
+app.post('/api/events/:slug/send-invitations', async (req, res) => {
+    const { slug } = req.params;
+    const event = getEventConfig(slug);
+    if (!event) return res.status(404).json({ error: 'Evento no encontrado' });
+
+    const adminKey = req.headers['x-admin-key'];
+    if (!adminKey || adminKey !== process.env.ADM_KEY) {
+        return res.status(401).json({ error: 'No autorizado' });
+    }
+
+    try {
+        const rows = getRegistrationsByEvent.all(slug);
+        if (!rows.length) {
+            return res.status(400).json({ error: 'No hay inscripciones para este evento' });
+        }
+
+        const results = { sent: 0, failed: 0, errors: [] };
+
+        for (const row of rows) {
+            const data = JSON.parse(row.data);
+            const group = data.group;
+            const calendarLink = calendarLinks[group];
+
+            if (!calendarLink) {
+                results.failed++;
+                results.errors.push(`${data.email}: grupo desconocido "${group}"`);
+                continue;
+            }
+
+            const { html, text } = buildInvitationEmail({
+                name: data.name || 'Participante',
+                eventTitle: event.title,
+                groupLabel: groupLabels[group] || group,
+                calendarLink,
+            });
+            const mailOptions = {
+                from: `"Chitaga Tech" <${process.env.GMAIL_USER}>`,
+                replyTo: process.env.GMAIL_USER,
+                to: data.email,
+                subject: 'Confirmacion de inscripcion',
+                html,
+                text,
+            };
+
+            try {
+                await transporter.sendMail(mailOptions);
+                results.sent++;
+                console.log(`Invitation sent to: ${data.email} (${group})`);
+            } catch (err) {
+                results.failed++;
+                results.errors.push(`${data.email}: ${err.message}`);
+                console.error(`Failed to send invitation to ${data.email}:`, err.message);
+            }
+        }
+
+        res.json({ success: true, total: rows.length, ...results });
+    } catch (err) {
+        console.error('Error sending invitations:', err);
+        res.status(500).json({ error: 'Error al enviar las invitaciones' });
     }
 });
 

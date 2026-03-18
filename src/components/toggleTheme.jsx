@@ -2,7 +2,8 @@
 "use client";
 
 const toggleTheme = () => {
-    document.documentElement.classList.toggle('dark');
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
 }
 
 export default toggleTheme;

@@ -92,6 +92,15 @@ const jsonLd = {
 
         <!-- Structured Data -->
         <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+        <!-- Restore theme before render to prevent flash -->
+        <script is:inline>
+            (function() {
+                var t = localStorage.getItem('theme');
+                if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+                if (t === 'dark') document.documentElement.classList.add('dark');
+            })();
+        </script>
     </head>
     <body>
         <div id="container">
@@ -104,8 +113,26 @@ const jsonLd = {
 
                     <nav class="nav-desktop">
                         <ul>
-                            {navLinks.map(({ href, label }, i) => (
-                                <li><a href={href} class={`nav-link${i === 0 ? ' active' : ''}`}>{label}</a></li>
+                            {navLinks.map(({ href, label, subItems }) => (
+                                <li>
+                                    {subItems?.length ? (
+                                        <div class="nav-dropdown">
+                                            <a href={href} class="nav-link">{label}</a>
+                                            <button class="nav-dropdown-toggle" aria-label={`Desplegar ${label}`} aria-expanded="false">
+                                                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                    <polyline points="6 9 12 15 18 9"></polyline>
+                                                </svg>
+                                            </button>
+                                            <ul class="submenu">
+                                                {subItems.map(({ href: subHref, label: subLabel }) => (
+                                                    <li><a href={subHref} class="nav-link sub-link">{subLabel}</a></li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    ) : (
+                                        <a href={href} class="nav-link">{label}</a>
+                                    )}
+                                </li>
                             ))}
                         </ul>
                     </nav>
@@ -119,13 +146,40 @@ const jsonLd = {
             </header>
 
             <div id="mobile-overlay" class="mobile-overlay">
+                <div class="mobile-overlay-header">
+                    <a href="/" class="header-brand">
+                        <img src="/favicon.ico" alt="Chitaga Tech" class="header-icon" />
+                        <span class="header-name">Chitaga Tech</span>
+                    </a>
+                </div>
                 <nav class="mobile-nav">
                     <ul>
-                        {navLinks.map(({ href, label }) => (
-                            <li><a href={href}>{label}</a></li>
+                        {navLinks.map(({ href, label, subItems }) => (
+                            <li>
+                                <div class="mobile-link-row">
+                                    <a href={href}>{label}</a>
+                                    {subItems?.length && (
+                                        <button class="mobile-submenu-toggle" aria-label={`Desplegar ${label}`} aria-expanded="false">
+                                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                                <polyline points="6 9 12 15 18 9"></polyline>
+                                            </svg>
+                                        </button>
+                                    )}
+                                </div>
+                                {subItems?.length && (
+                                    <ul class="mobile-submenu">
+                                        {subItems.map(({ href: subHref, label: subLabel }) => (
+                                            <li><a href={subHref}>{subLabel}</a></li>
+                                        ))}
+                                    </ul>
+                                )}
+                            </li>
                         ))}
                     </ul>
                 </nav>
+                <div class="mobile-overlay-footer">
+                    <p>Chitagá Tech &mdash; Que irse sea opción, no obligación.</p>
+                </div>
             </div>
 
             <script>
@@ -158,9 +212,9 @@ const jsonLd = {
                         <div class="footer-col">
                             <h4>Redes</h4>
                             <ul>
-                                <li><a href="#" aria-label="Facebook">Facebook</a></li>
-                                <li><a href="#" aria-label="Instagram">Instagram</a></li>
-                                <li><a href="#" aria-label="GitHub">GitHub</a></li>
+                                <li><a href="#">Facebook</a></li>
+                                <li><a href="#">Instagram</a></li>
+                                <li><a href="#">GitHub</a></li>
                             </ul>
                         </div>
                     </div>

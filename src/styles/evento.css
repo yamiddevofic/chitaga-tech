@@ -1,7 +1,7 @@
 /* ==================== Hero ==================== */
 .evento-hero {
     position: relative;
-    padding: 7rem 1.5rem 4.5rem;
+    padding: 5rem 1.5rem 3rem;
     overflow: hidden;
     background: var(--color-green-dark);
     min-height: 50vh;
@@ -16,31 +16,32 @@
     inset: 0;
     background: var(--hero-img) center/cover no-repeat;
     transform: scale(1.05);
+    opacity: 0.15;
 }
 
 .evento-hero::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(170deg, rgba(185, 58, 5, 0.92) 0%, rgba(120, 30, 0, 0.85) 100%);
+    background: linear-gradient(170deg, rgba(24, 64, 20, 0.92) 0%, rgba(24, 64, 20, 0.75) 100%);
     z-index: 1;
 }
 
 .dark .evento-hero {
-    background: #111111;
+    background: var(--color-green-dark);
 }
 
 .dark .evento-hero::before {
-    background: linear-gradient(170deg, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.8) 100%);
+    background: linear-gradient(170deg, rgba(24, 64, 20, 0.88) 0%, rgba(24, 64, 20, 0.75) 100%);
 }
 
 @media (min-width: 480px) {
-    .evento-hero { padding: 7.5rem 2rem 4.5rem; }
+    .evento-hero { padding: 6rem 2rem 3.5rem; }
 }
 
 @media (min-width: 768px) {
     .evento-hero {
-        padding: 8rem 3rem 5rem;
+        padding: 7rem 3rem 4rem;
         min-height: 45vh;
     }
 }
@@ -56,22 +57,22 @@
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 0.85rem;
-    text-align: center;
-    align-items: center;
+    gap: 1rem;
+    text-align: left;
+    align-items: flex-start;
 }
 
 .evento-back {
     display: inline-flex;
     align-items: center;
-    gap: 0.3rem;
+    gap: 0.35rem;
     width: fit-content;
     font-family: var(--font-pop);
-    font-size: 0.78rem;
+    font-size: 0.8rem;
     font-weight: 500;
-    color: rgba(255, 255, 255, 0.65);
+    color: rgba(255, 255, 255, 0.55);
     transition: color 0.2s ease, transform 0.2s ease;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.75rem;
 }
 
 .evento-back:hover {
@@ -82,15 +83,16 @@
 .evento-badge {
     display: inline-block;
     width: fit-content;
-    padding: 0.25rem 0.75rem;
+    padding: 0.3rem 0.85rem;
     font-size: 0.65rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.12em;
     border-radius: 9999px;
     color: rgba(255, 255, 255, 0.85);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     font-family: var(--font-pop);
+    margin-bottom: 0.25rem;
 }
 
 .evento-title {
@@ -99,27 +101,31 @@
     font-size: 1.75rem;
     line-height: 1.15;
     color: #ffffff;
-    max-width: 520px;
+    max-width: 500px;
 }
 
 @media (min-width: 480px) {
-    .evento-title { font-size: 2rem; }
+    .evento-title { font-size: 2.15rem; }
 }
 
 @media (min-width: 768px) {
-    .evento-title { font-size: 2.5rem; }
+    .evento-title { font-size: 2.75rem; }
 }
 
 .evento-description {
     font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.75;
-    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.7);
     max-width: 480px;
+    margin-top: 0.25rem;
 }
 
 @media (min-width: 768px) {
-    .evento-description { font-size: 1.05rem; }
+    .evento-description {
+        font-size: 1.05rem;
+        line-height: 1.8;
+    }
 }
 
 /* ==================== Meta info ==================== */
@@ -178,39 +184,47 @@
     color: #fca5a5;
 }
 
-/* ==================== Form section ==================== */
-.evento-form-section {
-    padding: 3.5rem 1.5rem 5rem;
+/* ==================== Main Layout ==================== */
+.evento-main {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
     background: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.dark .evento-form-section {
-    background: #141414;
-}
-
-@media (min-width: 480px) {
-    .evento-form-section { padding: 4rem 2rem 5rem; }
+.dark .evento-main {
+    background: #191919;
 }
 
 @media (min-width: 768px) {
-    .evento-form-section { padding: 4.5rem 3rem 6rem; }
+    .evento-main {
+        padding: 2rem;
+    }
 }
 
 @media (min-width: 1024px) {
-    .evento-form-section { padding: 5rem 4rem 7rem; }
+    .evento-main {
+        padding: 2rem;
+    }
 }
 
-.evento-form-inner {
-    max-width: 480px;
-    margin: 0 auto;
+/* ==================== Form Section ==================== */
+.evento-form-section {
+    width: 100%;
 }
 
 .evento-form-title {
     font-family: var(--font-montserrat);
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 1.8rem;
     color: var(--color-green-dark);
-    margin-bottom: 0.35rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
 }
 
 .dark .evento-form-title {
@@ -219,10 +233,11 @@
 
 .evento-form-subtitle {
     font-family: var(--font-sans);
-    font-size: 0.88rem;
+    font-size: 1rem;
     color: #9ca3af;
     margin-bottom: 2.5rem;
     line-height: 1.6;
+    text-align: center;
 }
 
 /* ==================== Form ==================== */
@@ -240,7 +255,7 @@
 
 .ef-group label {
     font-family: var(--font-sans);
-    font-size: 0.82rem;
+    font-size: 0.95rem;
     font-weight: 500;
     color: #374151;
     letter-spacing: 0.01em;
@@ -271,7 +286,7 @@
     background: transparent;
     color: #1a1a1a;
     font-family: var(--font-sans);
-    font-size: 0.95rem;
+    font-size: 1rem;
     transition: border-color 0.3s ease;
     outline: none;
     box-sizing: border-box;
@@ -362,7 +377,7 @@
     color: #ffffff;
     font-family: var(--font-pop);
     font-weight: 600;
-    font-size: 0.9rem;
+    font-size: 1rem;
     border: none;
     border-radius: 0.6rem;
     cursor: pointer;
@@ -535,12 +550,15 @@
 /* ==================== Closed state ==================== */
 .evento-closed {
     text-align: center;
-    padding: 3rem 1.5rem;
+    padding: 2rem;
+    background: rgba(245, 245, 245, 0.5);
+    border-radius: 1rem;
+    border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-.evento-closed-icon {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
+.dark .evento-closed {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
 }
 
 .evento-closed h2 {
