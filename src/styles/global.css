@@ -63,7 +63,7 @@ dark {
 }
 
 :where(.dark, .dark *) #site-header {
-    background: #111111;
+    background: #191919;
     border-bottom-color: rgba(255, 255, 255, 0.06);
 }
 
@@ -197,15 +197,17 @@ dark {
     background: none;
     border: none;
     gap: 5px;
-    transition: background 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
-#menu-toggle:hover {
-    background: rgba(0, 0, 0, 0.05);
+#menu-toggle:hover,
+#menu-toggle:active {
+    background: transparent;
 }
 
-:where(.dark, .dark *) #menu-toggle:hover {
-    background: rgba(255, 255, 255, 0.08);
+:where(.dark, .dark *) #menu-toggle:hover,
+:where(.dark, .dark *) #menu-toggle:active {
+    background: transparent;
 }
 
 #menu-toggle span {

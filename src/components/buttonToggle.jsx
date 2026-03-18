@@ -9,10 +9,9 @@ const ButtonToggle = () => {
 
     useEffect(() => {
         const saved = localStorage.getItem('theme');
-        const current = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+        const current = saved || 'light';
         setTheme(current);
         document.documentElement.classList.toggle('dark', current === 'dark');
-        if (!saved) localStorage.setItem('theme', current);
     }, []);
 
     return (

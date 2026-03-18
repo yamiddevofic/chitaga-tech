@@ -4,9 +4,9 @@ import cors from 'cors';
 import { corsOptions } from './config/cors.js';
 import { transporter } from './config/email.js';
 import {
-    insertContact, findByEmail, findByName, getAllContacts,
-    insertRegistration, findRegistrationByEmail, countRegistrations, getRegistrationsByEvent,
-    insertSuggestion, getSuggestionsByTopic, getAllSuggestions,
+    insertContact, findByEmail, findByName, getAllContacts, findContactByIp,
+    insertRegistration, findRegistrationByEmail, countRegistrations, getRegistrationsByEvent, findRegistrationByIp,
+    insertSuggestion, getSuggestionsByTopic, getAllSuggestions, findSuggestionByIp,
 } from './db/init.js';
 import { buildContactEmailHtml } from './templates/contact-email.js';
 import { buildRegistrationEmailHtml } from './templates/registration-email.js';
@@ -111,6 +111,7 @@ function getEventConfig(slug) {
 // ---------- Express app ----------
 const app = express();
 
+app.set('trust proxy', 1);
 app.use(cors(corsOptions));
 
 app.use((req, res, next) => {
@@ -139,7 +140,12 @@ app.get('/api/check-name', (req, res) => {
 });
 
 app.post('/api/contact', rateLimit, async (req, res) => {
+    const ip = req.ip || req.socket.remoteAddress;
     const { name, email, message } = req.body;
+
+    if (findContactByIp.get(ip)) {
+        return res.status(409).json({ error: 'Ya enviaste un mensaje desde este dispositivo' });
+    }
 
     if (!name || !email) {
         return res.status(400).json({ error: 'Nombre y correo son obligatorios' });
@@ -170,7 +176,7 @@ app.post('/api/contact', rateLimit, async (req, res) => {
     }
 
     try {
-        const result = insertContact.run(trimmedName, trimmedEmail, trimmedMessage);
+        const result = insertContact.run(trimmedName, trimmedEmail, trimmedMessage, ip);
         sendNotification({ name: trimmedName, email: trimmedEmail, message: trimmedMessage });
         res.json({ success: true, id: result.lastInsertRowid });
     } catch (err) {
@@ -211,6 +217,7 @@ app.get('/api/events/:slug/check-email', (req, res) => {
 
 // POST /api/events/:slug/register — register for an event
 app.post('/api/events/:slug/register', rateLimit, (req, res) => {
+    const ip = req.ip || req.socket.remoteAddress;
     const { slug } = req.params;
     const event = getEventConfig(slug);
 
@@ -220,6 +227,10 @@ app.post('/api/events/:slug/register', rateLimit, (req, res) => {
 
     if (event.status !== 'open') {
         return res.status(400).json({ error: 'Las inscripciones están cerradas' });
+    }
+
+    if (findRegistrationByIp.get(slug, ip)) {
+        return res.status(409).json({ error: 'Ya te inscribiste desde este dispositivo' });
     }
 
     // Check capacity
@@ -289,7 +300,7 @@ app.post('/api/events/:slug/register', rateLimit, (req, res) => {
     }
 
     try {
-        const result = insertRegistration.run(slug, email, JSON.stringify(sanitized));
+        const result = insertRegistration.run(slug, email, JSON.stringify(sanitized), ip);
 
         sendRegistrationNotification({
             eventTitle: event.title,
@@ -428,6 +439,7 @@ app.post('/api/events/:slug/send-invitations', async (req, res) => {
 // ==================== Suggestion routes ====================
 
 app.post('/api/suggestions', rateLimit, async (req, res) => {
+    const ip = req.ip || req.socket.remoteAddress;
     const { topic, name, message } = req.body;
 
     if (!topic || !message) {
@@ -454,8 +466,12 @@ app.post('/api/suggestions', rateLimit, async (req, res) => {
         return res.status(400).json({ error: 'La sugerencia es demasiado larga (máx. 2000 caracteres)' });
     }
 
+    if (findSuggestionByIp.get(trimmedTopic, ip)) {
+        return res.status(409).json({ error: 'Ya enviaste una sugerencia sobre este tema desde este dispositivo' });
+    }
+
     try {
-        const result = insertSuggestion.run(trimmedTopic, trimmedName, trimmedMessage);
+        const result = insertSuggestion.run(trimmedTopic, trimmedName, trimmedMessage, ip);
 
         const mailOptions = {
             from: `"Chitagá Tech" <${process.env.GMAIL_USER}>`,
