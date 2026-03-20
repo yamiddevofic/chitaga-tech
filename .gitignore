@@ -27,3 +27,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# local assistant/editor metadata
+.claude/
+.vscode/
