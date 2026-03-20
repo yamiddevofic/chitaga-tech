@@ -13,24 +13,24 @@ import '../styles/reglas.css';
 >
     <ButtonToggle client:load/>
 
-    <section class="rules-hero">
-        <div class="rules-hero-inner">
-            <a href="/" class="rules-back">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rules-back-icon"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
-                Volver al inicio
-            </a>
-            <span class="rules-badge">Comunidad</span>
-            <h1 class="rules-title">Las reglas que nos hacen comunidad</h1>
-            <p class="rules-subtitle">
-                No son restricciones. Son el cimiento de un espacio donde cada persona se siente segura para aprender, equivocarse y crecer.
-            </p>
-        </div>
-    </section>
-
     <section class="rules-content">
         <div class="rules-inner">
+            <article class="rules-article">
+                <header class="rules-article-header">
+                    <a href="/" class="rules-back">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="rules-back-icon"><path d="M19 12H5"/><path d="M12 19l-7-7 7-7"/></svg>
+                        Volver al inicio
+                    </a>
+                    <h1 class="rules-title">Las reglas que nos hacen comunidad</h1>
+                    <p class="rules-subtitle">
+                        No son restricciones. Son el cimiento de un espacio donde cada persona se siente segura para aprender, equivocarse y crecer.
+                    </p>
+                </header>
 
-            <p class="rules-intro">Chitagá Tech existe porque creemos que nuestra gente merece un lugar donde pueda ser ella misma, preguntar sin miedo y construir sin juicio. Estas reglas protegen eso. Al ser parte de esta comunidad, te comprometes a vivirlas.</p>
+            <div class="rules-intro-wrap">
+                <p class="rules-intro-kicker">Nuestra base</p>
+                <p class="rules-intro">Chitagá Tech existe porque creemos que nuestra gente merece un lugar donde pueda ser ella misma, preguntar sin miedo y construir sin juicio. Estas reglas protegen eso. Al ser parte de esta comunidad, te comprometes a vivirlas.</p>
+            </div>
 
             <div class="rules-list">
                 {rules.map((rule) => (
@@ -74,6 +74,7 @@ import '../styles/reglas.css';
                     <div id="sf-feedback" class="sf-feedback"></div>
                 </form>
             </div>
+            </article>
 
         </div>
     </section>

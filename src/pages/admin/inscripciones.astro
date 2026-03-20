@@ -1,0 +1,60 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import ButtonToggle from '../../components/buttonToggle.jsx';
+import { events } from '../../data/events.js';
+import '../../styles/admin-inscripciones.css';
+
+const eventsMeta = events.map((event) => ({
+    slug: event.slug,
+    title: event.title,
+    date: event.date,
+    time: event.time,
+    capacity: event.capacity,
+    status: event.status,
+}));
+---
+
+<Layout
+    title="Panel privado de inscritos — Chitagá Tech"
+    description="Panel privado para revisar en detalle las personas inscritas en eventos de Chitagá Tech."
+>
+    <ButtonToggle client:load />
+
+    <section class="admin-hero">
+        <div class="admin-hero-inner">
+            <p class="admin-kicker">Panel privado</p>
+            <h1>Inscritos por evento</h1>
+            <p>Ingresa la contraseña de administrador para ver el listado completo con cada registro en detalle.</p>
+        </div>
+    </section>
+
+    <main class="admin-main" data-events={JSON.stringify(eventsMeta)}>
+        <section class="admin-card">
+            <form id="admin-auth-form" class="admin-auth-form" autocomplete="off">
+                <div class="admin-field">
+                    <label for="admin-password">Contraseña de administrador</label>
+                    <input id="admin-password" name="password" type="password" required placeholder="Ingresa la contraseña" />
+                </div>
+
+                <div class="admin-field">
+                    <label for="admin-event-slug">Evento</label>
+                    <select id="admin-event-slug" name="eventSlug" required>
+                        {events.map((event) => (
+                            <option value={event.slug}>{event.title}</option>
+                        ))}
+                    </select>
+                </div>
+
+                <button type="submit" id="admin-load-btn" class="admin-load-btn">Ver inscritos</button>
+                <p id="admin-feedback" class="admin-feedback"></p>
+            </form>
+
+            <div id="admin-results" class="admin-results" hidden>
+                <div id="admin-summary" class="admin-summary"></div>
+                <div id="admin-list" class="admin-list"></div>
+            </div>
+        </section>
+    </main>
+
+    <script is:inline src="/scripts/admin-inscripciones.js"></script>
+</Layout>

@@ -3,7 +3,7 @@
     position: relative;
     padding: 7rem 1.5rem 5rem;
     overflow: hidden;
-    background: var(--color-orange);
+    background: #35180d;
     min-height: 65vh;
     display: flex;
     align-items: center;
@@ -22,12 +22,37 @@
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(170deg, rgba(185, 58, 5, 0.92) 0%, rgba(24, 64, 20, 0.75) 100%);
+    background: linear-gradient(145deg, rgba(185, 58, 5, 0.9) 0%, rgba(24, 64, 20, 0.82) 60%, rgba(12, 27, 20, 0.92) 100%);
     z-index: 1;
 }
 
 .dark .rules-hero::before {
-    background: linear-gradient(170deg, rgba(0, 0, 0, 0.88) 0%, rgba(0, 0, 0, 0.75) 100%);
+    background: linear-gradient(170deg, rgba(7, 8, 8, 0.9) 0%, rgba(8, 15, 12, 0.86) 100%);
+}
+
+.rules-glow {
+    position: absolute;
+    z-index: 2;
+    border-radius: 999px;
+    filter: blur(0.5px);
+    opacity: 0.75;
+    pointer-events: none;
+}
+
+.rules-glow-a {
+    width: 260px;
+    height: 260px;
+    top: 12%;
+    left: -90px;
+    background: radial-gradient(circle, rgba(255, 205, 168, 0.34) 0%, rgba(255, 205, 168, 0) 72%);
+}
+
+.rules-glow-b {
+    width: 300px;
+    height: 300px;
+    right: -100px;
+    bottom: -110px;
+    background: radial-gradient(circle, rgba(188, 241, 167, 0.2) 0%, rgba(188, 241, 167, 0) 74%);
 }
 
 @media (min-width: 480px) {
@@ -53,7 +78,7 @@
 
 .rules-hero-inner {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     max-width: 640px;
     margin: 0 auto;
     display: flex;
@@ -144,7 +169,7 @@
 
 /* ==================== Content section ==================== */
 .rules-content {
-    padding: 3.5rem 1.5rem 4rem;
+    padding: 2rem 1.5rem 4rem;
     background: #ffffff;
 }
 
@@ -165,12 +190,101 @@
 }
 
 .rules-inner {
-    max-width: 720px;
+    max-width: 760px;
     margin: 0 auto;
 }
 
+.rules-article {
+    padding: 0;
+}
+
+.dark .rules-article {
+    background: transparent;
+}
+
+@media (min-width: 768px) {
+    .rules-article {
+        padding: 1.75rem;
+    }
+}
+
+.rules-article-header {
+    margin-bottom: 1.2rem;
+    padding-bottom: 1.1rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.dark .rules-article-header {
+    border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.rules-article-header .rules-back {
+    color: #64748b;
+    margin-bottom: 0.95rem;
+}
+
+.rules-article-header .rules-back:hover {
+    color: var(--color-orange);
+}
+
+.dark .rules-article-header .rules-back {
+    color: #a1a1aa;
+}
+
+.rules-article-header .rules-badge {
+    color: var(--color-orange);
+    border-color: rgba(185, 58, 5, 0.35);
+    background: rgba(185, 58, 5, 0.08);
+    margin-bottom: 0.6rem;
+}
+
+.dark .rules-article-header .rules-badge {
+    color: #ffb18e;
+    border-color: rgba(255, 177, 142, 0.35);
+    background: rgba(185, 58, 5, 0.14);
+}
+
+.rules-article-header .rules-title {
+    color: var(--color-green-dark);
+    max-width: 100%;
+    margin-bottom: 0.5rem;
+}
+
+.dark .rules-article-header .rules-title {
+    color: var(--color-white);
+}
+
+.rules-article-header .rules-subtitle {
+    color: #5d6672;
+    max-width: 100%;
+}
+
+.dark .rules-article-header .rules-subtitle {
+    color: #a3a3a3;
+}
+
+.rules-intro-wrap {
+    margin-bottom: 2rem;
+    padding: 0.25rem 0 0.25rem 0.9rem;
+    border-left: 3px solid rgba(185, 58, 5, 0.35);
+}
+
+.dark .rules-intro-wrap {
+    border-left-color: rgba(255, 177, 142, 0.35);
+    background: transparent;
+}
+
+.rules-intro-kicker {
+    margin: 0 0 0.35rem;
+    font-family: var(--font-pop);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-orange);
+}
+
 .rules-intro {
-    margin-bottom: 2.5rem !important;
     font-family: var(--font-sans);
     font-size: 1rem;
     line-height: 1.85;
@@ -195,26 +309,26 @@
 
 /* ==================== Individual rule ==================== */
 .rule {
-    padding: 2.25rem 0;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 1.45rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .dark .rule {
-    border-bottom-color: rgba(255, 255, 255, 0.06);
+    border-bottom-color: rgba(255, 255, 255, 0.08);
 }
 
 .rule:first-child {
-    padding-top: 0.5rem;
+    padding-top: 0.25rem;
 }
 
 .rule:last-child {
-    border-bottom: none;
     padding-bottom: 0.5rem;
+    border-bottom: none;
 }
 
 @media (min-width: 768px) {
     .rule {
-        padding: 2.75rem 0;
+        padding: 2rem 0;
     }
 }
 
@@ -238,10 +352,13 @@
     font-size: 1.5rem;
     line-height: 1;
     color: var(--color-orange);
-    opacity: 0.25;
+    opacity: 1;
     flex-shrink: 0;
-    padding-top: 0.15rem;
-    min-width: 1.75rem;
+    min-width: 1.8rem;
+    padding-top: 0.05rem;
+    font-size: 1.1rem;
+    background: transparent;
+    border: none;
 }
 
 @media (min-width: 768px) {
@@ -257,7 +374,7 @@
     font-size: 1.1rem;
     line-height: 1.3;
     color: var(--color-green-dark);
-    margin-bottom: 0.3rem;
+    margin-bottom: 0.25rem;
 }
 
 .dark .rule h2 {
@@ -272,7 +389,7 @@
     font-family: var(--font-sans);
     font-size: 0.85rem;
     line-height: 1.5;
-    color: #9ca3af;
+    color: #64748b;
 }
 
 .dark .rule-sub {
@@ -283,7 +400,7 @@
     font-family: var(--font-sans);
     font-size: 0.95rem;
     line-height: 1.85;
-    color: #4b5563;
+    color: #475569;
     padding-left: 0;
 }
 
@@ -301,17 +418,19 @@
 /* ==================== Closing ==================== */
 .rules-closing {
     margin-top: 2.5rem;
-    padding: 3rem 1.5rem;
+    padding: 2.4rem 0.2rem 0;
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 0.75rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: transparent;
 }
 
 .dark .rules-closing {
-    border-top-color: rgba(255, 255, 255, 0.06);
+    border-top-color: rgba(255, 255, 255, 0.08);
+    background: transparent;
 }
 
 @media (min-width: 768px) {
@@ -364,12 +483,20 @@
 /* ==================== Suggestion form ==================== */
 .sf-section {
     margin-top: 3rem;
-    padding-top: 3rem;
-    border-top: 1px solid rgba(0, 0, 0, 0.06);
+    padding: 2.5rem 0 0;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    background: transparent;
 }
 
 .dark .sf-section {
-    border-top-color: rgba(255, 255, 255, 0.06);
+    border-top-color: rgba(255, 255, 255, 0.08);
+    background: transparent;
+}
+
+@media (min-width: 768px) {
+    .sf-section {
+        padding-top: 2.8rem;
+    }
 }
 
 .sf-title {

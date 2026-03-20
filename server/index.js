@@ -12,8 +12,12 @@ import { buildContactEmailHtml } from './templates/contact-email.js';
 import { buildRegistrationEmailHtml } from './templates/registration-email.js';
 import { buildSuggestionEmailHtml } from './templates/suggestion-email.js';
 import { buildInvitationEmail } from './templates/invitation-email.js';
+import { buildEventReminderEmail } from './templates/reminder-email.js';
 
 const PORT = process.env.PORT || 4324;
+const TIME_ZONE = process.env.TIME_ZONE || 'America/Bogota';
+const dateFormatter = new Intl.DateTimeFormat('es-CO', { dateStyle: 'long', timeZone: TIME_ZONE });
+const todayFormatter = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE });
 
 // ---------- Rate limiter (in-memory, per IP) ----------
 const rateLimits = new Map();
@@ -106,6 +110,23 @@ try {
 
 function getEventConfig(slug) {
     return eventsConfig.find(e => e.slug === slug);
+}
+
+function formatEventDate(dateString) {
+    if (!dateString) return '';
+    const parsed = new Date(dateString);
+    if (Number.isNaN(parsed)) return dateString;
+    return dateFormatter.format(parsed);
+}
+
+function isEventToday(eventDate) {
+    if (!eventDate) return false;
+    return eventDate === todayFormatter.format(new Date());
+}
+
+function isAdminRequestAuthorized(req) {
+    const adminKey = req.headers['x-admin-key'];
+    return !!adminKey && adminKey === process.env.ADM_KEY;
 }
 
 // ---------- Express app ----------
@@ -349,6 +370,10 @@ app.get('/api/events/:slug/registrations', (req, res) => {
     const event = getEventConfig(slug);
     if (!event) return res.status(404).json({ error: 'Evento no encontrado' });
 
+    if (!isAdminRequestAuthorized(req)) {
+        return res.status(401).json({ error: 'No autorizado' });
+    }
+
     try {
         const rows = getRegistrationsByEvent.all(slug);
         const registrations = rows.map(r => ({
@@ -379,8 +404,7 @@ app.post('/api/events/:slug/send-invitations', async (req, res) => {
     const event = getEventConfig(slug);
     if (!event) return res.status(404).json({ error: 'Evento no encontrado' });
 
-    const adminKey = req.headers['x-admin-key'];
-    if (!adminKey || adminKey !== process.env.ADM_KEY) {
+    if (!isAdminRequestAuthorized(req)) {
         return res.status(401).json({ error: 'No autorizado' });
     }
 
@@ -433,6 +457,78 @@ app.post('/api/events/:slug/send-invitations', async (req, res) => {
     } catch (err) {
         console.error('Error sending invitations:', err);
         res.status(500).json({ error: 'Error al enviar las invitaciones' });
+    }
+});
+
+app.post('/api/events/:slug/send-reminders', async (req, res) => {
+    const { slug } = req.params;
+    const event = getEventConfig(slug);
+    if (!event) return res.status(404).json({ error: 'Evento no encontrado' });
+
+    if (!isAdminRequestAuthorized(req)) {
+        return res.status(401).json({ error: 'No autorizado' });
+    }
+
+    if (!isEventToday(event.date)) {
+        return res.status(400).json({ error: 'La fecha del evento no coincide con hoy' });
+    }
+
+    try {
+        const rows = getRegistrationsByEvent.all(slug);
+        if (!rows.length) {
+            return res.status(400).json({ error: 'No hay inscripciones para este evento' });
+        }
+
+        const results = { sent: 0, failed: 0, skipped: 0, errors: [] };
+
+        for (const row of rows) {
+            const data = JSON.parse(row.data);
+            const email = (data.email || '').toLowerCase();
+            if (!email) {
+                results.skipped++;
+                results.errors.push(`Registro ${row.id}: sin correo`);
+                continue;
+            }
+
+            const hasPhoto = (data.has_photo || '').toLowerCase() === 'si';
+            const group = data.group;
+            const calendarLink = calendarLinks[group];
+            const groupLabel = groupLabels[group] || group || 'Horario pendiente';
+            const reminderPayload = buildEventReminderEmail({
+                name: data.name,
+                eventTitle: event.title,
+                eventDate: formatEventDate(event.date),
+                eventTime: event.time,
+                groupLabel,
+                calendarLink,
+                needsPhoto: !hasPhoto,
+            });
+
+            const mailOptions = {
+                from: `"Chitagá Tech" <${process.env.GMAIL_USER}>`,
+                replyTo: process.env.GMAIL_USER,
+                to: email,
+                subject: reminderPayload.subject,
+                html: reminderPayload.html,
+                text: reminderPayload.text,
+            };
+
+            try {
+                await transporter.sendMail(mailOptions);
+                results.sent++;
+                console.log(`Reminder sent to: ${email} (needsPhoto=${!hasPhoto})`);
+            } catch (err) {
+                results.failed++;
+                const errMsg = `${email}: ${err.message}`;
+                results.errors.push(errMsg);
+                console.error('Failed to send reminder:', errMsg);
+            }
+        }
+
+        res.json({ success: true, total: rows.length, ...results });
+    } catch (err) {
+        console.error('Error sending reminders:', err);
+        res.status(500).json({ error: 'Error al enviar los recordatorios' });
     }
 });
 
