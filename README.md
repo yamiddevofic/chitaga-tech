@@ -4,6 +4,11 @@ Nos fuimos para aprender, volvemos para construir. Comunidad tech en Chitaga, No
 
 > **"Que irse sea opcion, no obligacion"**
 
+## Novedades recientes
+
+- Se integró el panel privado de inscripciones (`/admin/inscripciones`) para consultar registros por evento con autenticación por `ADM_KEY`.
+- Se consolidó el flujo de comunicaciones del evento: invitaciones de calendario por grupo y recordatorios del día del evento.
+
 ## Tech Stack
 
 - [Astro](https://astro.build) — Framework web
