@@ -1,6 +1,6 @@
 # Chitaga Tech
 
-Nos fuimos para aprender, volvemos para construir. Comunidad tech en Chitaga, Norte de Santander, Colombia.
+Es una comunidad de jóvenes y profesionales locales que creen que desde Chitagá también se puede hacer tecnología. Aprendemos juntos, construimos proyectos reales y trabajamos para que el municipio tenga su primer ecosistema de innovación. 
 
 > **"Que irse sea opcion, no obligacion"**
 
