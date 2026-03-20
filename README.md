@@ -28,7 +28,7 @@ npm install
 
 ### Variables de entorno
 
-Crear un archivo `.env` en la raiz del proyecto:
+Crear un archivo `server/.env`:
 
 ```env
 GMAIL_USER=tu-email@gmail.com
@@ -39,6 +39,8 @@ PORT=4324
 TIME_ZONE=America/Bogota # opcional, zona horaria usada para calcular "hoy" en recordatorios
 ```
 
+`ADM_KEY` protege las rutas privadas del panel de inscripciones y los envios masivos de correos.
+
 ## Scripts
 
 | Comando | Descripcion |
@@ -47,7 +49,9 @@ TIME_ZONE=America/Bogota # opcional, zona horaria usada para calcular "hoy" en r
 | `npm run dev:host` | Dev accesible desde la red local |
 | `npm run build` | Genera el sitio estatico en `dist/` |
 | `npm run preview` | Preview del build |
+| `npm run preview:host` | Preview accesible desde la red local |
 | `npm run server` | Inicia el API server Express (puerto 4324) |
+| `npm run reminders` | Dispara recordatorios (requiere `EVENT_SLUG` y `ADM_KEY`) |
 | `npm run deploy` | Build + preview |
 
 ## Estructura
@@ -56,6 +60,7 @@ TIME_ZONE=America/Bogota # opcional, zona horaria usada para calcular "hoy" en r
 chitaga-tech/
 ├── src/
 │   ├── pages/              # Paginas Astro (index, reglas, evento/[slug])
+│   │   └── admin/           # Panel privado de inscripciones por evento
 │   ├── components/         # Componentes Astro + React + shadcn/ui
 │   ├── layouts/            # Layout principal con header, footer y SEO
 │   ├── data/               # Configuracion del sitio, eventos, navegacion
@@ -68,6 +73,8 @@ chitaga-tech/
 │   └── templates/          # Plantillas HTML de emails
 ├── public/
 │   └── scripts/            # JS del lado del cliente (formularios)
+├── scripts/
+│   └── send-reminders.js   # Script CLI para recordatorios
 └── dist/                   # Build de produccion
 ```
 
@@ -82,13 +89,28 @@ chitaga-tech/
 | `/api/events/:slug/check-email` | GET | Verificar si un email ya esta registrado |
 | `/api/events/:slug/register` | POST | Registrarse a un evento |
 | `/api/events/:slug/registrations` | GET | Listar registros (admin) |
-| `/api/events/:slug/send-invitations` | POST | Enviar invitaciones por email |
-| `/api/events/:slug/send-reminders` | POST | Recordatorio administrado (hoy y con foto) para participantes | 
+| `/api/events/:slug/send-invitations` | POST | Reenviar invitaciones de calendario por grupo (admin) |
+| `/api/events/:slug/send-reminders` | POST | Enviar recordatorio del dia del evento (admin) |
 | `/api/suggestions` | GET/POST | Sugerencias de la comunidad |
 
 Todas las rutas POST tienen rate limiting (10 req/60s por IP).
 
-La ruta `/api/events/:slug/send-reminders` solicita la cabecera `x-admin-key` y solo dispara correos cuando `date` coincide con la fecha actual (según `TIME_ZONE`).
+Las rutas privadas `/api/events/:slug/registrations`, `/api/events/:slug/send-invitations` y `/api/events/:slug/send-reminders` solicitan la cabecera `x-admin-key`.
+
+`/api/events/:slug/send-reminders` solo dispara correos cuando `date` coincide con la fecha actual (segun `TIME_ZONE`).
+
+## Panel privado de inscripciones
+
+- URL: `/admin/inscripciones`
+- Permite consultar inscritos por evento con resumen de cupos, fecha y horario.
+- Muestra cada registro con todos los campos del formulario, fecha de registro e IP.
+- La clave de administrador se guarda en `sessionStorage` para agilizar consultas dentro de la misma sesion.
+
+## Comunicaciones por correo
+
+- Al registrarse, cada participante recibe confirmacion e invitacion de calendario segun su grupo.
+- `POST /api/events/:slug/send-invitations` permite reenviar invitaciones de calendario a todos los inscritos.
+- `POST /api/events/:slug/send-reminders` envia recordatorios personalizados el mismo dia del evento (incluye estado de foto y horario).
 
 ### Ejecutar recordatorio a las 7 a.m.
 
