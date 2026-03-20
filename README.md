@@ -114,8 +114,8 @@ Las rutas privadas `/api/events/:slug/registrations`, `/api/events/:slug/send-in
 ## Comunicaciones por correo
 
 - Al registrarse, cada participante recibe confirmacion e invitacion de calendario segun su grupo.
-- `POST /api/events/:slug/send-invitations` permite reenviar invitaciones de calendario a todos los inscritos.
-- `POST /api/events/:slug/send-reminders` envia recordatorios personalizados el mismo dia del evento (incluye estado de foto y horario).
+- `POST /api/events/:slug/send-reminders` envia recordatorios personalizados el mismo dia del evento e incluye de nuevo el link de calendario (por si aun no lo agregaron), junto con horario/grupo y estado de foto.
+- `POST /api/events/:slug/send-invitations` queda como opcion manual para reenviar invitaciones de calendario a todos los inscritos antes del dia del evento.
 
 ### Ejecutar recordatorio a las 7 a.m.
 
