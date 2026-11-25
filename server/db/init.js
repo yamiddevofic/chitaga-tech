@@ -56,7 +56,7 @@ export const findByName = db.prepare(
 );
 
 export const getAllContacts = db.prepare(
-    'SELECT * FROM contacts ORDER BY created_at DESC'
+    'SELECT id, name, email, message, created_at FROM contacts ORDER BY created_at DESC'
 );
 
 // Event registrations
@@ -104,11 +104,11 @@ export const findSuggestionByIp = db.prepare(
 );
 
 export const getSuggestionsByTopic = db.prepare(
-    'SELECT * FROM suggestions WHERE topic = ? ORDER BY created_at DESC'
+    'SELECT id, topic, name, message, created_at FROM suggestions WHERE topic = ? ORDER BY created_at DESC'
 );
 
 export const getAllSuggestions = db.prepare(
-    'SELECT * FROM suggestions ORDER BY created_at DESC'
+    'SELECT id, topic, name, message, created_at FROM suggestions ORDER BY created_at DESC'
 );
 
 export default db;

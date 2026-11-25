@@ -20,34 +20,41 @@ const dateFormatter = new Intl.DateTimeFormat('es-CO', { dateStyle: 'long', time
 const todayFormatter = new Intl.DateTimeFormat('en-CA', { timeZone: TIME_ZONE });
 
 // ---------- Rate limiter (in-memory, per IP) ----------
-const rateLimits = new Map();
 const RATE_WINDOW_MS = 60_000;
-const RATE_MAX_REQUESTS = 10;
 
-function rateLimit(req, res, next) {
-    const ip = req.ip || req.socket.remoteAddress;
-    const now = Date.now();
-    const entry = rateLimits.get(ip);
+function createRateLimit(maxRequests) {
+    const hits = new Map();
 
-    if (!entry || now - entry.start > RATE_WINDOW_MS) {
-        rateLimits.set(ip, { start: now, count: 1 });
+    // Clean up stale entries every 5 minutes
+    setInterval(() => {
+        const now = Date.now();
+        for (const [ip, entry] of hits) {
+            if (now - entry.start > RATE_WINDOW_MS) hits.delete(ip);
+        }
+    }, 300_000);
+
+    return function (req, res, next) {
+        const ip = req.ip || req.socket.remoteAddress;
+        const now = Date.now();
+        const entry = hits.get(ip);
+
+        if (!entry || now - entry.start > RATE_WINDOW_MS) {
+            hits.set(ip, { start: now, count: 1 });
+            return next();
+        }
+
+        entry.count++;
+        if (entry.count > maxRequests) {
+            return res.status(429).json({ error: 'Demasiados intentos. Espera un momento.' });
+        }
         return next();
-    }
-
-    entry.count++;
-    if (entry.count > RATE_MAX_REQUESTS) {
-        return res.status(429).json({ error: 'Demasiados intentos. Espera un momento.' });
-    }
-    return next();
+    };
 }
 
-// Clean up stale entries every 5 minutes
-setInterval(() => {
-    const now = Date.now();
-    for (const [ip, entry] of rateLimits) {
-        if (now - entry.start > RATE_WINDOW_MS) rateLimits.delete(ip);
-    }
-}, 300_000);
+// Form submissions
+const rateLimit = createRateLimit(10);
+// Live availability checks while typing (separate bucket so they don't block submissions)
+const checkRateLimit = createRateLimit(30);
 
 // ---------- Email notifications ----------
 async function sendNotification({ name, email, message }) {
@@ -148,13 +155,13 @@ app.get('/api/health', (req, res) => {
 
 // ==================== Contact routes ====================
 
-app.get('/api/check-email', (req, res) => {
+app.get('/api/check-email', checkRateLimit, (req, res) => {
     const email = (req.query.email || '').trim().toLowerCase();
     if (!email) return res.json({ exists: false });
     res.json({ exists: !!findByEmail.get(email) });
 });
 
-app.get('/api/check-name', (req, res) => {
+app.get('/api/check-name', checkRateLimit, (req, res) => {
     const name = (req.query.name || '').trim();
     if (!name) return res.json({ exists: false });
     res.json({ exists: !!findByName.get(name) });
@@ -207,6 +214,10 @@ app.post('/api/contact', rateLimit, async (req, res) => {
 });
 
 app.get('/api/contacts', (req, res) => {
+    if (!isAdminRequestAuthorized(req)) {
+        return res.status(401).json({ error: 'No autorizado' });
+    }
+
     try {
         const contacts = getAllContacts.all();
         res.json(contacts);
@@ -226,14 +237,6 @@ app.get('/api/events/:slug/spots', (req, res) => {
 
     const row = countRegistrations.get(slug);
     res.json({ count: row?.count || 0, capacity: event.capacity });
-});
-
-// GET /api/events/:slug/check-email?email=... — duplicate check per event
-app.get('/api/events/:slug/check-email', (req, res) => {
-    const { slug } = req.params;
-    const email = (req.query.email || '').trim().toLowerCase();
-    if (!email) return res.json({ exists: false });
-    res.json({ exists: !!findRegistrationByEmail.get(slug, email) });
 });
 
 // POST /api/events/:slug/register — register for an event
@@ -588,6 +591,10 @@ app.post('/api/suggestions', rateLimit, async (req, res) => {
 });
 
 app.get('/api/suggestions', (req, res) => {
+    if (!isAdminRequestAuthorized(req)) {
+        return res.status(401).json({ error: 'No autorizado' });
+    }
+
     try {
         const { topic } = req.query;
         const rows = topic ? getSuggestionsByTopic.all(topic) : getAllSuggestions.all();
